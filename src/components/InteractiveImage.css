@@ -1,0 +1,149 @@
+.interactive-image-container {
+  position: relative;
+  width: 100%;
+  max-width: 1600px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.base-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  user-select: none;
+}
+
+/* Hotspot wrapper - positioned absolutely over base image */
+.hotspot-wrapper {
+  position: absolute;
+  cursor: default; /* Only show pointer when over opaque pixels (handled by .hovered) */
+  transform-origin: center center;
+  transition: transform 0.15s ease-out;
+}
+
+.hotspot-wrapper.hovered {
+  cursor: pointer;
+}
+
+/* The PNG cutout image */
+.hotspot-image {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  user-select: none;
+  pointer-events: none; /* Click handled by wrapper */
+}
+
+/* Wobble animation on hover - single back-and-forth then settle enlarged */
+.hotspot-wrapper.hovered {
+  animation: wobble 0.4s ease-out forwards;
+}
+
+@keyframes wobble {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  33% {
+    transform: rotate(-3deg) scale(1.04);
+  }
+  66% {
+    transform: rotate(2deg) scale(1.03);
+  }
+  100% {
+    transform: rotate(0deg) scale(1.03);
+  }
+}
+
+/* Label that appears on hover */
+.hotspot-label {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 8px;
+  padding: 6px 12px;
+  background: rgba(0, 0, 0, 0.85);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+  border-radius: 4px;
+  pointer-events: none;
+  animation: fadeIn 0.15s ease-out;
+}
+
+/* Label arrow */
+.hotspot-label::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 6px solid transparent;
+  border-top-color: rgba(0, 0, 0, 0.85);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+/* Focus state for accessibility */
+.hotspot-wrapper:focus {
+  outline: none;
+}
+
+.hotspot-wrapper:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* Optional: subtle glow effect on hover */
+.hotspot-wrapper.hovered .hotspot-image {
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+}
+
+/* Custom glow effect - uses CSS variable for color */
+.hotspot-wrapper.has-glow .hotspot-image {
+  filter:
+    drop-shadow(0 0 8px var(--glow-color))
+    /* drop-shadow(0 0 8px var(--glow-color)) */
+    /* drop-shadow(0 0 24px var(--glow-color)); */
+}
+
+.hotspot-wrapper.has-glow.hovered .hotspot-image {
+  filter:
+    drop-shadow(0 0 12px var(--glow-color))
+    drop-shadow(0 0 24px var(--glow-color))
+    drop-shadow(0 0 36px var(--glow-color));
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .hotspot-label {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  @keyframes wobble {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    33% {
+      transform: rotate(-2deg) scale(1.03);
+    }
+    66% {
+      transform: rotate(1.5deg) scale(1.02);
+    }
+    100% {
+      transform: rotate(0deg) scale(1.02);
+    }
+  }
+}
