@@ -12,30 +12,44 @@ function InteractiveImage({ baseImage, hotspots = [] }) {
   // Load hotspot images into canvas for hit testing
   useEffect(() => {
     hotspots.forEach((hotspot) => {
-      const img = new Image()
-      img.crossOrigin = 'anonymous'
-      img.onload = () => {
-        const canvas = document.createElement('canvas')
-        canvas.width = img.naturalWidth
-        canvas.height = img.naturalHeight
-        const ctx = canvas.getContext('2d', { willReadFrequently: true })
-        ctx.drawImage(img, 0, 0)
+      // If no image, use region-based detection (entire area is clickable)
+      if (!hotspot.image) {
+        canvasDataRef.current[hotspot.id] = null // Mark as region-based
+      } else {
+        const img = new Image()
+        img.crossOrigin = 'anonymous'
+        img.onload = () => {
+          const canvas = document.createElement('canvas')
+          canvas.width = img.naturalWidth
+          canvas.height = img.naturalHeight
+          const ctx = canvas.getContext('2d', { willReadFrequently: true })
+          ctx.drawImage(img, 0, 0)
 
-        // Store the image data for hit testing
-        canvasDataRef.current[hotspot.id] = {
-          imageData: ctx.getImageData(0, 0, canvas.width, canvas.height),
-          width: canvas.width,
-          height: canvas.height,
+          // Store the image data for hit testing
+          canvasDataRef.current[hotspot.id] = {
+            imageData: ctx.getImageData(0, 0, canvas.width, canvas.height),
+            width: canvas.width,
+            height: canvas.height,
+          }
         }
+        // Use the main image for hit testing (default state)
+        img.src = hotspot.image
       }
-      img.src = hotspot.image
+
+      // Preload hover image if it exists (so it appears instantly on hover)
+      if (hotspot.hoverImage) {
+        const hoverImg = new Image()
+        hoverImg.src = hotspot.hoverImage
+      }
     })
   }, [hotspots])
 
   // Check if a point (relative to element) is on a non-transparent pixel
   const isOpaqueAt = useCallback((hotspotId, relativeX, relativeY, elementWidth, elementHeight) => {
     const data = canvasDataRef.current[hotspotId]
-    if (!data) return true // Fallback to clickable if not loaded yet
+    // If null, it's a region-based hotspot (entire area is clickable)
+    // If undefined, image hasn't loaded yet (fallback to clickable)
+    if (data === null || data === undefined) return true
 
     // Convert element-relative coords to image pixel coords
     const pixelX = Math.floor((relativeX / elementWidth) * data.width)
@@ -111,7 +125,7 @@ function InteractiveImage({ baseImage, hotspots = [] }) {
       {hotspots.map((hotspot) => (
         <div
           key={hotspot.id}
-          className={`hotspot-wrapper ${hoveredId === hotspot.id ? 'hovered' : ''} ${hotspot.glow ? 'has-glow' : ''}`}
+          className={`hotspot-wrapper ${hoveredId === hotspot.id ? 'hovered' : ''} ${hotspot.glow ? 'has-glow' : ''} ${hotspot.noWobble ? 'no-wobble' : ''}`}
           style={{
             left: `${hotspot.position.x}%`,
             top: `${hotspot.position.y}%`,
@@ -136,12 +150,28 @@ function InteractiveImage({ baseImage, hotspots = [] }) {
             }
           }}
         >
-          <img
-            src={hotspot.image}
-            alt={hotspot.label}
-            className="hotspot-image"
-            draggable={false}
-          />
+          {/* Show image: hoverImage when hovered, otherwise default image (if exists) */}
+          {(hotspot.image || (hoveredId === hotspot.id && hotspot.hoverImage)) && (
+            <img
+              src={hoveredId === hotspot.id && hotspot.hoverImage ? hotspot.hoverImage : hotspot.image}
+              alt={hotspot.label}
+              className={`hotspot-image ${hotspot.hoverImageSize ? 'custom-size' : ''}`}
+              style={
+                hoveredId === hotspot.id && hotspot.hoverImageSize
+                  ? {
+                      width: `${hotspot.hoverImageSize.width}%`,
+                      height: `${hotspot.hoverImageSize.height}%`,
+                      ...(hotspot.hoverImagePosition && {
+                        position: 'absolute',
+                        left: `${hotspot.hoverImagePosition.x}%`,
+                        top: `${hotspot.hoverImagePosition.y}%`,
+                      }),
+                    }
+                  : undefined
+              }
+              draggable={false}
+            />
+          )}
 
           {/* Label shown on hover */}
           {hoveredId === hotspot.id && (

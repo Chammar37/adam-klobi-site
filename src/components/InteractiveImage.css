@@ -19,6 +19,7 @@
   cursor: default; /* Only show pointer when over opaque pixels (handled by .hovered) */
   transform-origin: center center;
   transition: transform 0.15s ease-out;
+  overflow: visible; /* Allow hover images to overflow */
 }
 
 .hotspot-wrapper.hovered {
@@ -34,23 +35,30 @@
   pointer-events: none; /* Click handled by wrapper */
 }
 
+/* Custom sized hover images (can overflow wrapper) */
+.hotspot-image.custom-size {
+  width: auto;
+  height: auto;
+  object-fit: unset;
+}
+
 /* Wobble animation on hover - single back-and-forth then settle enlarged */
 .hotspot-wrapper.hovered {
   animation: wobble 0.4s ease-out forwards;
 }
 
+/* Disable wobble for specific hotspots */
+.hotspot-wrapper.no-wobble.hovered {
+  animation: none;
+  transform: none;
+}
+
 @keyframes wobble {
   0% {
-    transform: rotate(0deg) scale(1);
-  }
-  33% {
-    transform: rotate(-3deg) scale(1.04);
-  }
-  66% {
-    transform: rotate(2deg) scale(1.03);
+    transform: rotate(0deg);
   }
   100% {
-    transform: rotate(0deg) scale(1.03);
+    transform: rotate(1.5deg);
   }
 }
 
@@ -112,17 +120,35 @@
 
 /* Custom glow effect - uses CSS variable for color */
 .hotspot-wrapper.has-glow .hotspot-image {
-  filter:
-    drop-shadow(0 0 8px var(--glow-color))
-    /* drop-shadow(0 0 8px var(--glow-color)) */
-    /* drop-shadow(0 0 24px var(--glow-color)); */
+  filter: drop-shadow(0 0 4px var(--glow-color));
+  animation: glowPulse 2.5s ease-in-out infinite;
 }
 
 .hotspot-wrapper.has-glow.hovered .hotspot-image {
   filter:
-    drop-shadow(0 0 12px var(--glow-color))
-    drop-shadow(0 0 24px var(--glow-color))
-    drop-shadow(0 0 36px var(--glow-color));
+    drop-shadow(0 0 6px var(--glow-color))
+    drop-shadow(0 0 12px var(--glow-color));
+  animation: glowPulseHover 2s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% {
+    filter: drop-shadow(0 0 0px var(--glow-color));
+  }
+  50% {
+    filter: drop-shadow(0 0 5px var(--glow-color));
+  }
+}
+
+@keyframes glowPulseHover {
+  0%, 100% {
+    filter: drop-shadow(0 0 0px var(--glow-color));
+  }
+  50% {
+    filter:
+      drop-shadow(0 0 6px var(--glow-color))
+      drop-shadow(0 0 12px var(--glow-color));
+  }
 }
 
 /* Responsive adjustments */
@@ -134,16 +160,10 @@
 
   @keyframes wobble {
     0% {
-      transform: rotate(0deg) scale(1);
-    }
-    33% {
-      transform: rotate(-2deg) scale(1.03);
-    }
-    66% {
-      transform: rotate(1.5deg) scale(1.02);
+      transform: rotate(0deg);
     }
     100% {
-      transform: rotate(0deg) scale(1.02);
+      transform: rotate(1deg);
     }
   }
 }
