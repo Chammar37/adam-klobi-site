@@ -8,6 +8,7 @@ import './InteractiveImage.css'
 function InteractiveImage({ baseImage, hotspots = [] }) {
   const [hoveredId, setHoveredId] = useState(null)
   const canvasDataRef = useRef({}) // Stores ImageData for each hotspot
+  const containerRef = useRef(null)
 
   // Load hotspot images into canvas for hit testing
   useEffect(() => {
@@ -44,16 +45,32 @@ function InteractiveImage({ baseImage, hotspots = [] }) {
     })
   }, [hotspots])
 
-  // Check if a point (relative to element) is on a non-transparent pixel
-  const isOpaqueAt = useCallback((hotspotId, relativeX, relativeY, elementWidth, elementHeight) => {
-    const data = canvasDataRef.current[hotspotId]
+  // Check if a point is on a non-transparent pixel for a hotspot
+  const isOpaqueAtPoint = useCallback((hotspot, containerX, containerY, containerWidth, containerHeight) => {
+    // Check if point is within hotspot bounds
+    const hotspotLeft = (hotspot.position.x / 100) * containerWidth
+    const hotspotTop = (hotspot.position.y / 100) * containerHeight
+    const hotspotWidth = hotspot.size ? (hotspot.size.width / 100) * containerWidth : 0
+    const hotspotHeight = hotspot.size ? (hotspot.size.height / 100) * containerHeight : 0
+
+    // Check bounds
+    if (containerX < hotspotLeft || containerX > hotspotLeft + hotspotWidth ||
+        containerY < hotspotTop || containerY > hotspotTop + hotspotHeight) {
+      return false
+    }
+
+    // Get relative position within hotspot
+    const relativeX = containerX - hotspotLeft
+    const relativeY = containerY - hotspotTop
+
+    const data = canvasDataRef.current[hotspot.id]
     // If null, it's a region-based hotspot (entire area is clickable)
     // If undefined, image hasn't loaded yet (fallback to clickable)
     if (data === null || data === undefined) return true
 
-    // Convert element-relative coords to image pixel coords
-    const pixelX = Math.floor((relativeX / elementWidth) * data.width)
-    const pixelY = Math.floor((relativeY / elementHeight) * data.height)
+    // Convert to image pixel coords
+    const pixelX = Math.floor((relativeX / hotspotWidth) * data.width)
+    const pixelY = Math.floor((relativeY / hotspotHeight) * data.height)
 
     // Bounds check
     if (pixelX < 0 || pixelX >= data.width || pixelY < 0 || pixelY >= data.height) {
@@ -64,40 +81,50 @@ function InteractiveImage({ baseImage, hotspots = [] }) {
     const index = (pixelY * data.width + pixelX) * 4
     const alpha = data.imageData.data[index + 3]
 
-    // Consider opaque if alpha > 10 (small threshold for anti-aliasing)
     return alpha > 10
   }, [])
 
-  const getRelativeCoords = (e, element) => {
-    const rect = element.getBoundingClientRect()
-    return {
-      x: e.clientX - rect.left,
-      y: e.clientY - rect.top,
-      width: rect.width,
-      height: rect.height,
+  // Find the hotspot with highest priority that has an opaque pixel at the given point
+  // Uses 'priority' for event handling (defaults to zIndex, then 0)
+  const findHotspotAtPoint = useCallback((containerX, containerY, containerWidth, containerHeight) => {
+    let bestHotspot = null
+    let bestPriority = -Infinity
+
+    for (const hotspot of hotspots) {
+      if (isOpaqueAtPoint(hotspot, containerX, containerY, containerWidth, containerHeight)) {
+        const priority = hotspot.priority ?? hotspot.zIndex ?? 0
+        if (priority > bestPriority) {
+          bestPriority = priority
+          bestHotspot = hotspot
+        }
+      }
     }
-  }
 
-  const handleMouseMove = (e, hotspot) => {
-    const { x, y, width, height } = getRelativeCoords(e, e.currentTarget)
-    const isOpaque = isOpaqueAt(hotspot.id, x, y, width, height)
+    return bestHotspot
+  }, [hotspots, isOpaqueAtPoint])
 
-    if (isOpaque && hoveredId !== hotspot.id) {
-      setHoveredId(hotspot.id)
-    } else if (!isOpaque && hoveredId === hotspot.id) {
-      setHoveredId(null)
-    }
-  }
+  const handleContainerMouseMove = useCallback((e) => {
+    if (!containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
 
-  const handleMouseLeave = () => {
+    const hotspot = findHotspotAtPoint(x, y, rect.width, rect.height)
+    setHoveredId(hotspot ? hotspot.id : null)
+  }, [findHotspotAtPoint])
+
+  const handleContainerMouseLeave = useCallback(() => {
     setHoveredId(null)
-  }
+  }, [])
 
-  const handleClick = (e, hotspot) => {
-    const { x, y, width, height } = getRelativeCoords(e, e.currentTarget)
-    const isOpaque = isOpaqueAt(hotspot.id, x, y, width, height)
+  const handleContainerClick = useCallback((e) => {
+    if (!containerRef.current) return
+    const rect = containerRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
 
-    if (!isOpaque) return // Ignore clicks on transparent areas
+    const hotspot = findHotspotAtPoint(x, y, rect.width, rect.height)
+    if (!hotspot) return
 
     if (hotspot.link) {
       if (hotspot.link.startsWith('#')) {
@@ -109,10 +136,16 @@ function InteractiveImage({ baseImage, hotspots = [] }) {
         window.location.href = hotspot.link
       }
     }
-  }
+  }, [findHotspotAtPoint])
 
   return (
-    <div className="interactive-image-container">
+    <div
+      ref={containerRef}
+      className="interactive-image-container"
+      onMouseMove={handleContainerMouseMove}
+      onMouseLeave={handleContainerMouseLeave}
+      onClick={handleContainerClick}
+    >
       {/* Base image */}
       <img
         src={baseImage}
@@ -125,7 +158,7 @@ function InteractiveImage({ baseImage, hotspots = [] }) {
       {hotspots.map((hotspot) => (
         <div
           key={hotspot.id}
-          className={`hotspot-wrapper ${hoveredId === hotspot.id ? 'hovered' : ''} ${hotspot.glow ? 'has-glow' : ''} ${hotspot.noWobble ? 'no-wobble' : ''}`}
+          className={`hotspot-wrapper ${hoveredId === hotspot.id ? 'hovered' : ''} ${hotspot.glow ? 'has-glow' : ''} ${hotspot.tilt ? 'has-tilt' : ''} ${hotspot.enlarge ? 'has-enlarge' : ''}`}
           style={{
             left: `${hotspot.position.x}%`,
             top: `${hotspot.position.y}%`,
@@ -136,19 +169,12 @@ function InteractiveImage({ baseImage, hotspots = [] }) {
             ...(hotspot.glow && {
               '--glow-color': hotspot.glow,
             }),
+            ...(hotspot.zIndex !== undefined && {
+              zIndex: hotspot.zIndex,
+            }),
+            pointerEvents: 'none',
           }}
-          onMouseMove={(e) => handleMouseMove(e, hotspot)}
-          onMouseLeave={handleMouseLeave}
-          onClick={(e) => handleClick(e, hotspot)}
-          role="button"
-          tabIndex={0}
           aria-label={hotspot.label}
-          onKeyDown={(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-              e.preventDefault()
-              handleClick(e, hotspot)
-            }
-          }}
         >
           {/* Show image: hoverImage when hovered, otherwise default image (if exists) */}
           {(hotspot.image || (hoveredId === hotspot.id && hotspot.hoverImage)) && (

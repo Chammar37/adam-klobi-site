@@ -42,23 +42,45 @@
   object-fit: unset;
 }
 
-/* Wobble animation on hover - single back-and-forth then settle enlarged */
-.hotspot-wrapper.hovered {
-  animation: wobble 0.4s ease-out forwards;
+/* Tilt animation on hover */
+.hotspot-wrapper.has-tilt.hovered {
+  animation: tilt 0.3s ease-out forwards;
 }
 
-/* Disable wobble for specific hotspots */
-.hotspot-wrapper.no-wobble.hovered {
-  animation: none;
-  transform: none;
-}
-
-@keyframes wobble {
+@keyframes tilt {
   0% {
     transform: rotate(0deg);
   }
   100% {
     transform: rotate(1.5deg);
+  }
+}
+
+/* Enlarge on hover */
+.hotspot-wrapper.has-enlarge.hovered {
+  animation: enlarge 0.3s ease-out forwards;
+}
+
+@keyframes enlarge {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.05);
+  }
+}
+
+/* Both tilt and enlarge */
+.hotspot-wrapper.has-tilt.has-enlarge.hovered {
+  animation: tiltAndEnlarge 0.3s ease-out forwards;
+}
+
+@keyframes tiltAndEnlarge {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  100% {
+    transform: rotate(1.5deg) scale(1.05);
   }
 }
 
@@ -126,9 +148,9 @@
 
 .hotspot-wrapper.has-glow.hovered .hotspot-image {
   filter:
-    drop-shadow(0 0 6px var(--glow-color))
-    drop-shadow(0 0 12px var(--glow-color));
-  animation: glowPulseHover 2s ease-in-out infinite;
+    drop-shadow(0 0 10px var(--glow-color))
+    drop-shadow(0 0 20px var(--glow-color));
+  animation: none; /* Stay lit on hover, no pulse */
 }
 
 @keyframes glowPulse {
@@ -158,12 +180,30 @@
     padding: 4px 8px;
   }
 
-  @keyframes wobble {
+  @keyframes tilt {
     0% {
       transform: rotate(0deg);
     }
     100% {
       transform: rotate(1deg);
+    }
+  }
+
+  @keyframes enlarge {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.03);
+    }
+  }
+
+  @keyframes tiltAndEnlarge {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    100% {
+      transform: rotate(1deg) scale(1.03);
     }
   }
 }

@@ -1,4 +1,9 @@
 import InteractiveImage from './components/InteractiveImage'
+import SongsList from './components/SongsList'
+import TourDates from './components/TourDates'
+import MerchGrid from './components/MerchGrid'
+import ArtistBio from './components/ArtistBio'
+import './App.css'
 
 function App() {
   return (
@@ -16,44 +21,37 @@ function App() {
               link: '#tours'
             },
             {
-              id: 'curtains',
-              label: 'Merch',
-              hoverImage: '/hotspots/curtains/open curtains.png',
-              position: { x: 5, y: 0 },
-              size: { width: 45, height: 4 },
-              hoverImageSize: { width: 100, height: 1200 },
-              hoverImagePosition: { x: 0, y: 0 },
-              noWobble: true,
-              link: '#merch'
+              id: 'guitar-case',
+              label: 'Music',
+              image: '/hotspots/guitar_test.png',
+              position: { x: 2, y: 48.5 },
+              size: { width: 42, height: 49 },
+              glow: '#0054ff',
+              link: '#songs',
+              zIndex: 10,
+              priority: 1,
+              enlarge: true,
             },
             {
               id: 'tv',
               label: 'TV',
               image: '/hotspots/tv/tv off_.png',
               hoverImage: '/hotspots/tv/tv on.png',
-              position: { x: 5, y: 50 },
+              position: { x: 5, y: 48 },
               size: { width: 10, height: 15 },
-              noWobble: true,
-              link: '#tv'
-            },
-            {
-              id: 'guitar-case',
-              label: 'Music',
-              image: '/hotspots/guitar_test.png',
-              position: { x: 3, y: 49 },
-              size: { width: 40, height: 45 },
-              glow: '#0054ff',
-              link: '#songs'
+              link: '#tv',
+              zIndex: 5,
+              priority: 20
             },
             {
               id: 'computer',
               label: 'Computer',
               image: '/hotspots/computer/computer off.png',
               hoverImage: '/hotspots/computer/computer on.png',
-              position: { x: 80, y: 30 },  // Adjust position
-              size: { width: 12, height: 18 },  // Adjust size
-              noWobble: true,
-              link: '#computer'
+              position: { x: 80, y: 30 },
+              size: { width: 12, height: 18 },
+              link: '#computer',
+              glow: '#ffffff',
             },
             {
               id: 'amp',
@@ -76,17 +74,18 @@ function App() {
             {
               id: 'guitar',
               label: 'Guitar',
-              image: '/hotspots/guitar.png',
-              position: { x: 49, y: 43 },
-              size: { width: 50, height: 35 },
-              link: '#guitar'
+              image: '/hotspots/guitar-bigback.png',
+              position: { x: 0, y: 0 },
+              size: { width: 100, height: 100 },
+              link: '#guitar',
+              glow: '#ffffff',
             },
             {
               id: 'cd-tower',
               label: 'CD Tower',
               image: '/hotspots/CD tower.png',
-              position: { x: 45, y: 32.5 },  // Adjust position
-              size: { width: 10, height: 20 },  // Adjust size
+              position: { x: 45, y: 32.5 },
+              size: { width: 10, height: 20 },
               link: '#cd-tower',
               glow: '#ffffff',
             },
@@ -94,41 +93,59 @@ function App() {
               id: 'jvc',
               label: 'JVC',
               image: '/hotspots/JVC.png',
-              position: { x: 32.5, y: 52.5 },  // Adjust position
-              size: { width: 6, height: 3.5 },  // Adjust size
+              position: { x: 32.5, y: 52.5 },
+              size: { width: 6, height: 3.5 },
               link: '#jvc',
               glow: '#ffffff',
+              enlarge: true,
             },
             {
               id: 'silver-camera',
               label: 'Camera',
               image: '/hotspots/Silver camera.png',
-              position: { x: 70, y: 60 },  // Adjust position
-              size: { width: 5, height: 5 },  // Adjust size
+              position: { x: 25, y: 40 },
+              size: { width: 4, height: 4 },
               link: '#camera'
             },
             {
               id: 'plane',
               label: 'Plane',
               image: '/hotspots/Plane.png',
-              position: { x: 69.2, y: 5.2 },  // Adjust position
-              size: { width: 12, height: 10 },  // Adjust size
+              position: { x: 69.2, y: 5.2 },
+              size: { width: 12, height: 10 },
               link: '#plane',
               glow: '#ffffff',
-            },
+            }
           ]}
         />
       </section>
 
-      {/* Target sections for scroll navigation */}
-      <section id="songs" style={{ minHeight: '100vh', padding: '4rem' }}>
-        <h2>Songs</h2>
+      <section id="songs" className="content-section">
+        <div className="section-container">
+          <h2 className="section-title">Music</h2>
+          <SongsList />
+        </div>
       </section>
-      <section id="merch" style={{ minHeight: '100vh', padding: '4rem' }}>
-        <h2>Merch</h2>
+
+      <section id="tours" className="content-section">
+        <div className="section-container">
+          <h2 className="section-title">Tour Dates</h2>
+          <TourDates />
+        </div>
       </section>
-      <section id="tours" style={{ minHeight: '100vh', padding: '4rem' }}>
-        <h2>Tours</h2>
+
+      <section id="merch" className="content-section">
+        <div className="section-container">
+          <h2 className="section-title">Merch</h2>
+          <MerchGrid />
+        </div>
+      </section>
+
+      <section id="about" className="content-section">
+        <div className="section-container">
+          <h2 className="section-title">About</h2>
+          <ArtistBio />
+        </div>
       </section>
     </main>
   )

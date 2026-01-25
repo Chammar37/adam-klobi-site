@@ -1,0 +1,145 @@
+.artist-bio {
+  display: grid;
+  gap: 2rem;
+}
+
+.bio-loading,
+.bio-error {
+  text-align: center;
+  padding: 2rem;
+  color: #888;
+}
+
+.bio-photo {
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.bio-photo img {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.bio-content {
+  text-align: center;
+}
+
+.bio-name {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #fff;
+}
+
+.bio-text {
+  max-width: 700px;
+  margin: 0 auto 2rem;
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #ccc;
+  text-align: left;
+}
+
+.bio-text p {
+  margin-bottom: 1rem;
+}
+
+.bio-socials {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-link {
+  display: inline-block;
+  padding: 0.6rem 1.2rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-decoration: none;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 25px;
+  transition: background 0.2s ease;
+}
+
+.social-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.bio-contact {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.bio-contact a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.bio-contact a:hover {
+  text-decoration: underline;
+}
+
+.bio-gallery {
+  margin-top: 2rem;
+}
+
+.bio-gallery h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  text-align: center;
+  color: #fff;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+}
+
+.gallery-item {
+  display: block;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.gallery-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-item:hover img {
+  transform: scale(1.1);
+}
+
+@media (min-width: 768px) {
+  .artist-bio {
+    grid-template-columns: 1fr 2fr;
+    align-items: start;
+  }
+
+  .bio-photo {
+    margin: 0;
+  }
+
+  .bio-content {
+    text-align: left;
+  }
+
+  .bio-socials {
+    justify-content: flex-start;
+  }
+
+  .bio-gallery {
+    grid-column: 1 / -1;
+  }
+
+  .bio-gallery h3 {
+    text-align: left;
+  }
+}
