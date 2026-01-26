@@ -20,3 +20,4 @@ Thumbs.db
 # Sanity
 studio/dist/
 studio/node_modules/
+node_modules/.vite/deps/_metadata.json
