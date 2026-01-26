@@ -1,7 +1,4 @@
 import InteractiveImage from './components/InteractiveImage'
-import SongsList from './components/SongsList'
-import TourDates from './components/TourDates'
-import MerchGrid from './components/MerchGrid'
 import ArtistBio from './components/ArtistBio'
 import './App.css'
 
@@ -9,15 +6,13 @@ function App() {
   return (
     <main>
       <section className="hero-section">
-        <a href="https://adamklobi.com" className="site-logo-link">
-          <img
-            src="/Adam_Klobi_Logo.svg"
-            alt="Adam Klobi"
-            className="site-logo"
-          />
-        </a>
         <InteractiveImage
           baseImage="/base-image.jpg"
+          logo={{
+            src: '/Adam_Klobi_Logo.svg',
+            alt: 'Adam Klobi',
+            href: 'https://adamklobi.com'
+          }}
           hotspots={[
             {
               id: 'glob',
@@ -25,7 +20,7 @@ function App() {
               image: '/hotspots/glob.png',
               position: { x: 66.3, y: 21.3 },
               size: { width: 17.5, height: 28 },
-              link: '#tours'
+              link: '/tour'
             },
             {
               id: 'guitar-case',
@@ -34,7 +29,7 @@ function App() {
               position: { x: 2, y: 48.5 },
               size: { width: 42, height: 49 },
               glow: '#0054ff',
-              link: '#songs',
+              link: '/music',
               zIndex: 10,
               priority: 1,
               enlarge: true,
@@ -109,10 +104,12 @@ function App() {
             {
               id: 'silver-camera',
               label: 'Camera',
-              image: '/hotspots/Silver camera.png',
-              position: { x: 25, y: 40 },
-              size: { width: 4, height: 4 },
-              link: '#camera'
+              image: '/hotspots/camera/silver_cam.png',
+              hoverImage: '/hotspots/camera/silver_cam_on.png',
+              position: { x: 24, y: 39 },
+              size: { width: 6, height: 7 },
+              link: '#camera',
+              glow: '#ffffff',
             },
             {
               id: 'plane',
@@ -125,27 +122,6 @@ function App() {
             }
           ]}
         />
-      </section>
-
-      <section id="songs" className="content-section">
-        <div className="section-container">
-          <h2 className="section-title">Music</h2>
-          <SongsList />
-        </div>
-      </section>
-
-      <section id="tours" className="content-section">
-        <div className="section-container">
-          <h2 className="section-title">Tour Dates</h2>
-          <TourDates />
-        </div>
-      </section>
-
-      <section id="merch" className="content-section">
-        <div className="section-container">
-          <h2 className="section-title">Merch</h2>
-          <MerchGrid />
-        </div>
       </section>
 
       <section id="about" className="content-section">

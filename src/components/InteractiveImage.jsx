@@ -1,14 +1,16 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { useNavigate } from 'react-router-dom'
 import './InteractiveImage.css'
 
 /**
  * InteractiveImage - Displays a base image with PNG cutout hotspots overlaid
  * Uses canvas hit-testing to only trigger interactions on non-transparent pixels
  */
-function InteractiveImage({ baseImage, hotspots = [] }) {
+function InteractiveImage({ baseImage, hotspots = [], logo }) {
   const [hoveredId, setHoveredId] = useState(null)
   const canvasDataRef = useRef({}) // Stores ImageData for each hotspot
   const containerRef = useRef(null)
+  const navigate = useNavigate()
 
   // Load hotspot images into canvas for hit testing
   useEffect(() => {
@@ -128,15 +130,20 @@ function InteractiveImage({ baseImage, hotspots = [] }) {
 
     if (hotspot.link) {
       if (hotspot.link.startsWith('#')) {
+        // Hash link - scroll to section
         const section = document.querySelector(hotspot.link)
         if (section) {
           section.scrollIntoView({ behavior: 'smooth' })
         }
-      } else {
+      } else if (hotspot.link.startsWith('http')) {
+        // External URL
         window.location.href = hotspot.link
+      } else {
+        // Internal route - use React Router
+        navigate(hotspot.link)
       }
     }
-  }, [findHotspotAtPoint])
+  }, [findHotspotAtPoint, navigate])
 
   return (
     <div
@@ -146,6 +153,18 @@ function InteractiveImage({ baseImage, hotspots = [] }) {
       onMouseLeave={handleContainerMouseLeave}
       onClick={handleContainerClick}
     >
+      {/* Logo */}
+      {logo && (
+        <a href={logo.href} className="image-logo-link">
+          <img
+            src={logo.src}
+            alt={logo.alt || 'Logo'}
+            className="image-logo"
+            draggable={false}
+          />
+        </a>
+      )}
+
       {/* Base image */}
       <img
         src={baseImage}

@@ -1,18 +1,15 @@
-.hero-section {
-  position: relative;
+.back-link {
+  display: inline-block;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  margin-bottom: 1.5rem;
+  opacity: 0.8;
+  transition: opacity 0.2s;
 }
 
-.site-logo-link {
-  position: absolute;
-  left: 0;
-  top: 13px;
-  z-index: 100;
-}
-
-.site-logo {
-  width: 557px;
-  height: 118px;
-  display: block;
+.back-link:hover {
+  opacity: 1;
 }
 
 .content-section {

@@ -6,6 +6,21 @@
   overflow: hidden;
 }
 
+/* Logo positioned relative to image */
+.image-logo-link {
+  position: absolute;
+  left: 0;
+  top: 1.2%;
+  width: 34.8%;
+  z-index: 100;
+}
+
+.image-logo {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
 .base-image {
   display: block;
   width: 100%;
