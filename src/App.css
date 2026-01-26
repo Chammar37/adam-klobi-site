@@ -1,3 +1,20 @@
+.hero-section {
+  position: relative;
+}
+
+.site-logo-link {
+  position: absolute;
+  left: 0;
+  top: 13px;
+  z-index: 100;
+}
+
+.site-logo {
+  width: 557px;
+  height: 118px;
+  display: block;
+}
+
 .content-section {
   min-height: 100vh;
   padding: 4rem 2rem;

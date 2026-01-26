@@ -9,6 +9,13 @@ function App() {
   return (
     <main>
       <section className="hero-section">
+        <a href="https://adamklobi.com" className="site-logo-link">
+          <img
+            src="/Adam_Klobi_Logo.svg"
+            alt="Adam Klobi"
+            className="site-logo"
+          />
+        </a>
         <InteractiveImage
           baseImage="/base-image.jpg"
           hotspots={[
