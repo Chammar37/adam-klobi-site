@@ -1,0 +1,54 @@
+.about-page {
+  min-height: 100vh;
+  background: url('/ak_about.png') center top / cover no-repeat;
+  background-color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 0 clamp(70px, 6vw, 120px) 3rem;
+}
+
+.about-bio {
+  max-width: 900px;
+  font-family: 'Roboto Mono', monospace;
+  font-size: clamp(0.9rem, 1.8vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.6;
+  color: #fff;
+  text-transform: uppercase;
+  text-align: justify;
+  text-decoration: underline;
+  text-decoration-color: #3a3aff;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
+}
+
+.about-contact {
+  margin-top: 1.5rem;
+  font-family: 'Roboto Mono', monospace;
+  font-size: clamp(0.65rem, 1vw, 0.85rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.about-contact a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.about-contact a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .about-page {
+    padding: 0 1.5rem 2rem;
+    background-position: center center;
+  }
+
+  .about-bio {
+    font-size: clamp(0.75rem, 3.5vw, 1.1rem);
+  }
+}

@@ -1,13 +1,15 @@
-import song from './song'
 import tourDate from './tourDate'
 import merchItem from './merchItem'
 import artistBio from './artistBio'
-import siteImage from './siteImage'
+import video from './video'
+import release from './release'
+import single from './single'
 
 export const schemaTypes = [
-  song,
   tourDate,
   merchItem,
   artistBio,
-  siteImage
+  video,
+  release,
+  single
 ]

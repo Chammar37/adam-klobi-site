@@ -25,13 +25,7 @@ function TourDates() {
 
   if (loading) return <div className="tour-loading">Loading tour dates...</div>
   if (error) return <div className="tour-error">{error}</div>
-  if (dates.length === 0) {
-    return (
-      <div className="tour-empty">
-        <p>No upcoming shows at the moment. Check back soon!</p>
-      </div>
-    )
-  }
+  if (dates.length === 0) return null
 
   return (
     <div className="tour-dates">

@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import './InteractiveImage.css'
 
 /**
  * InteractiveImage - Displays a base image with PNG cutout hotspots overlaid
  * Uses canvas hit-testing to only trigger interactions on non-transparent pixels
  */
-function InteractiveImage({ baseImage, hotspots = [], logo }) {
+function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [] }) {
   const [hoveredId, setHoveredId] = useState(null)
   const canvasDataRef = useRef({}) // Stores ImageData for each hotspot
   const containerRef = useRef(null)
@@ -224,6 +224,26 @@ function InteractiveImage({ baseImage, hotspots = [], logo }) {
           )}
         </div>
       ))}
+
+      {/* Mobile menu */}
+      {mobileItems.length > 0 && (
+        <div className="mobile-menu">
+          <div className="mobile-menu-bg">
+            <img src={baseImage} alt="" draggable={false} />
+          </div>
+          <div className="mobile-menu-logo">
+            <img src="/Adam_Klobi_Logo.svg" alt="Adam Klobi" draggable={false} />
+          </div>
+          <div className="mobile-menu-items">
+            {mobileItems.map((item) => (
+              <Link key={item.label} to={item.link} className="mobile-menu-item">
+                <img src={item.image} alt={item.label} />
+                <span>{item.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

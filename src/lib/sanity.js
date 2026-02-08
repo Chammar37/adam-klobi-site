@@ -24,39 +24,6 @@ const builder = client ? imageUrlBuilder(client) : null
 export const urlFor = (source) => builder?.image(source)
 
 // Query helpers
-export const fetchSongs = async () => {
-  if (!client) return []
-  return client.fetch(`
-    *[_type == "song"] | order(releaseDate desc) {
-      _id,
-      title,
-      artwork,
-      releaseDate,
-      spotifyUrl,
-      appleMusicUrl,
-      youtubeUrl,
-      soundcloudUrl,
-      featured
-    }
-  `)
-}
-
-export const fetchFeaturedSongs = async () => {
-  if (!client) return []
-  return client.fetch(`
-    *[_type == "song" && featured == true] | order(releaseDate desc) {
-      _id,
-      title,
-      artwork,
-      releaseDate,
-      spotifyUrl,
-      appleMusicUrl,
-      youtubeUrl,
-      soundcloudUrl
-    }
-  `)
-}
-
 export const fetchTourDates = async () => {
   if (!client) return []
   return client.fetch(`
@@ -103,11 +70,45 @@ export const fetchArtistBio = async () => {
   `)
 }
 
-export const fetchSiteImages = async (location) => {
-  if (!client) return []
-  const query = location
-    ? `*[_type == "siteImage" && location == $location]`
-    : `*[_type == "siteImage"]`
-
-  return client.fetch(query, { location })
+export const fetchLatestRelease = async () => {
+  if (!client) return null
+  return client.fetch(`
+    *[_type == "release" && latest == true][0] {
+      _id,
+      title,
+      description,
+      artwork,
+      supportingImage,
+      link,
+      releaseDate
+    }
+  `)
 }
+
+export const fetchSingles = async () => {
+  if (!client) return []
+  return client.fetch(`
+    *[_type == "single"] | order(releaseDate desc) {
+      _id,
+      title,
+      description,
+      artwork,
+      link,
+      releaseDate
+    }
+  `)
+}
+
+export const fetchVideos = async () => {
+  if (!client) return []
+  return client.fetch(`
+    *[_type == "video"] | order(publishedAt desc) {
+      _id,
+      title,
+      youtubeUrl,
+      publishedAt,
+      featured
+    }
+  `)
+}
+

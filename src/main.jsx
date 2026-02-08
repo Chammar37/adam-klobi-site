@@ -4,16 +4,26 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import App from './App.jsx'
 import MusicPage from './pages/MusicPage.jsx'
 import TourPage from './pages/TourPage.jsx'
+import MerchPage from './pages/MerchPage.jsx'
+import AboutPage from './pages/AboutPage.jsx'
+import VideosPage from './pages/VideosPage.jsx'
+import NavMenu from './components/NavMenu.jsx'
+import Footer from './components/Footer.jsx'
 import './index.css'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
+      <NavMenu />
       <Routes>
         <Route path="/" element={<App />} />
         <Route path="/music" element={<MusicPage />} />
         <Route path="/tour" element={<TourPage />} />
+        <Route path="/merch" element={<MerchPage />} />
+        <Route path="/about" element={<AboutPage />} />
+        <Route path="/videos" element={<VideosPage />} />
       </Routes>
+      <Footer />
     </BrowserRouter>
   </StrictMode>,
 )

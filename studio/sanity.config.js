@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'adam-klobi',
   title: 'Adam Klobi',
 
-  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'YOUR_PROJECT_ID',
+  projectId: process.env.SANITY_STUDIO_PROJECT_ID || 'l233r8fw',
   dataset: process.env.SANITY_STUDIO_DATASET || 'production',
 
   plugins: [
