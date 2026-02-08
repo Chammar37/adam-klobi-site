@@ -177,17 +177,6 @@
   }
 }
 
-@keyframes glowPulseHover {
-  0%, 100% {
-    filter: drop-shadow(0 0 0px var(--glow-color));
-  }
-  50% {
-    filter:
-      drop-shadow(0 0 6px var(--glow-color))
-      drop-shadow(0 0 12px var(--glow-color));
-  }
-}
-
 /* Mobile menu - hidden on desktop */
 .mobile-menu {
   display: none;
@@ -220,7 +209,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.3);
+    filter: brightness(0.2);
   }
 
   .mobile-menu-logo {
@@ -267,5 +256,25 @@
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.15em;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hotspot-wrapper {
+    transition: none;
+  }
+
+  .hotspot-wrapper.has-glow .hotspot-image {
+    animation: none;
+  }
+
+  .hotspot-wrapper.has-tilt.hovered,
+  .hotspot-wrapper.has-enlarge.hovered,
+  .hotspot-wrapper.has-tilt.has-enlarge.hovered {
+    animation: none;
+  }
+
+  .hotspot-label {
+    animation: none;
   }
 }

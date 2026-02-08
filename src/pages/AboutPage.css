@@ -1,6 +1,6 @@
 .about-page {
   min-height: 100vh;
-  background: url('/ak_about.png') center top / cover no-repeat;
+  background: url('/ak_about.webp') center top / cover no-repeat;
   background-color: #000;
   display: flex;
   flex-direction: column;

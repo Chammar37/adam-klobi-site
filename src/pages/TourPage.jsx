@@ -16,7 +16,7 @@ function TourPage() {
   return (
     <main className="tour-page">
       <div className="tour-signup">
-        <p className="tour-signup-text">SIGN UP TO BE NOTIFIED AS DATES DROP</p>
+        <p className="tour-signup-text">BE THE FIRST TO KNOW</p>
         <form className="tour-signup-form" onSubmit={handleSubmit}>
           <button type="submit" className="tour-signup-btn">SIGN UP</button>
           <input

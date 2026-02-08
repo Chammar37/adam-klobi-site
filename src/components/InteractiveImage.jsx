@@ -171,6 +171,7 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [] }) 
         alt="Interactive scene"
         className="base-image"
         draggable={false}
+        fetchPriority="high"
       />
 
       {/* PNG Cutout Hotspots */}

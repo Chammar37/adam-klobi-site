@@ -52,7 +52,7 @@
 }
 
 @media (max-width: 768px) {
-  .nav-menu {
+  .nav-menu--home {
     display: none;
   }
 }

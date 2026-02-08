@@ -5,7 +5,7 @@ function NavMenu() {
   const { pathname } = useLocation()
 
   return (
-    <nav className="nav-menu">
+    <nav className={`nav-menu${pathname === '/' ? ' nav-menu--home' : ''}`}>
       <Link to="/" className="nav-logo">
         <img src="/Adam_Klobi_Logo.svg" alt="Adam Klobi" />
       </Link>

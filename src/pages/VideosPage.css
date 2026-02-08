@@ -1,6 +1,6 @@
 .videos-page {
   min-height: 100vh;
-  background: url('/ak_videos_bg.png') center top / 100% auto no-repeat;
+  background: url('/ak_videos_bg.webp') center top / 100% auto no-repeat;
   background-color: #111;
   padding: 12rem 2rem 4rem;
 }

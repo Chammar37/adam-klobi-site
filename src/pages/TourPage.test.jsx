@@ -10,7 +10,7 @@ vi.mock('../components/TourDates', () => ({
 describe('TourPage', () => {
   it('renders signup text', () => {
     renderWithRouter(<TourPage />)
-    expect(screen.getByText('SIGN UP TO BE NOTIFIED AS DATES DROP')).toBeInTheDocument()
+    expect(screen.getByText('BE THE FIRST TO KNOW')).toBeInTheDocument()
   })
 
   it('renders TourDates component', () => {
