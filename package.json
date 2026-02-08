@@ -13,7 +13,8 @@
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",
     "test:e2e:mobile": "playwright test --project=mobile",
-    "test:all": "vitest run && playwright test"
+    "test:all": "vitest run && playwright test",
+    "deploy": "npm run build && npx wrangler pages deploy dist --project-name=adamklobi"
   },
   "dependencies": {
     "@portabletext/react": "^3.0.0",

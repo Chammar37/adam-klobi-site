@@ -11,7 +11,8 @@ function App() {
           mobileItems={[
             { image: '/hotspots/CD tower.png', label: 'Music', link: '/music' },
             { image: '/hotspots/computer/computer on.png', label: 'Merch', link: '/merch' },
-            { image: '/hotspots/street sign.png', label: 'Tour', link: '/tour' },
+            { image: '/hotspots/guitar_test.png', label: 'Tour', link: '/tour' },
+            { image: '/hotspots/tv/tv on.png', label: 'Videos', link: '/videos' },
           ]}
           hotspots={[
             // {

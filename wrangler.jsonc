@@ -1,7 +1,6 @@
 {
-  "name": "adam-klobi-site",
-  "compatibility_date": "2026-01-24",
-  "assets": {
-    "directory": "./dist"
-  }
+  // Account for this repo: set WRANGLER_ACCOUNT_ID in .env (copy from .env.example)
+  // Deploys to Cloudflare Pages project "adamklobi" (npm run deploy)
+  "name": "adamklobi",
+  "pages_build_output_dir": "./dist"
 }
