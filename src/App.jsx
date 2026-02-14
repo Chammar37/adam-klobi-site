@@ -15,18 +15,18 @@ function App() {
             { image: '/mobile/mobile_computer 1.webp', label: 'Merch', link: '/merch' },
           ]}
           hotspots={[
-            {
-              id: 'guitar-case',
-              label: 'Tour',
-              image: '/hotspots/guitar_test.webp',
-              position: { x: 2, y: 48.5 },
-              size: { width: 42, height: 49 },
-              glow: '#0054ff',
-              link: '/tour',
-              zIndex: 10,
-              priority: 1,
-              enlarge: true,
-            },
+            // {
+            //   id: 'guitar-case',
+            //   label: 'Tour',
+            //   image: '/hotspots/guitar_test.webp',
+            //   position: { x: 2, y: 48.5 },
+            //   size: { width: 42, height: 49 },
+            //   glow: '#0054ff',
+            //   link: '/tour',
+            //   zIndex: 10,
+            //   priority: 1,
+            //   enlarge: true,
+            // },
             {
               id: 'tv',
               label: 'Videos',

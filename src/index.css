@@ -1,3 +1,7 @@
+:root {
+  --footer-height: 100px;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -15,14 +19,28 @@ body {
   width: 100%;
 }
 
-/* Page transition */
+/* Page transition + sticky footer layout */
 @keyframes fadeSlideIn {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .page-transition {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
   animation: fadeSlideIn 0.45s ease;
+}
+
+.page-transition > main {
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --footer-height: 60px;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

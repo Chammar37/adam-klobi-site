@@ -23,7 +23,7 @@ function Footer() {
         <a href="https://instagram.com/adam.klobi" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
           <FaInstagram />
         </a>
-        <a href="https://wa.me/adamklobi" target="_blank" rel="noopener noreferrer" aria-label="WhatsApp">
+        <a href="mailto:contact@adamklobi.com" aria-label="Email">
           <FaWhatsapp />
         </a>
       </div>
