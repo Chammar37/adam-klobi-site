@@ -55,4 +55,19 @@
   .nav-menu--home {
     display: none;
   }
+
+  .nav-logo img {
+    width: 200px;
+  }
+
+  .nav-links {
+    margin: -6px 0 0 4px;
+    padding: 0 0 0 10px;
+    font-size: 11px;
+    line-height: 13px;
+  }
+
+  .nav-links li {
+    margin-bottom: 3px;
+  }
 }

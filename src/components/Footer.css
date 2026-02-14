@@ -29,3 +29,22 @@
 .footer-socials a:hover {
   opacity: 0.7;
 }
+
+@media (max-width: 768px) {
+  .site-footer {
+    justify-content: center;
+    padding: 1rem 0;
+  }
+
+  .footer-ak {
+    display: none;
+  }
+
+  .footer-socials {
+    gap: 24px;
+  }
+
+  .footer-socials a {
+    font-size: 2rem;
+  }
+}

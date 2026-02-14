@@ -228,7 +228,7 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [] }) 
 
       {/* Mobile menu */}
       {mobileItems.length > 0 && (
-        <div className="mobile-menu">
+        <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
           <div className="mobile-menu-bg">
             <img src={baseImage} alt="" draggable={false} />
           </div>

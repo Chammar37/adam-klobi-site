@@ -8,10 +8,11 @@ function App() {
         <InteractiveImage
           baseImage="/base-image.webp"
           mobileItems={[
-            { image: '/hotspots/CD tower.webp', label: 'Music', link: '/music' },
-            { image: '/hotspots/computer/computer on.webp', label: 'Merch', link: '/merch' },
-            { image: '/hotspots/guitar_test.webp', label: 'Tour', link: '/tour' },
-            { image: '/hotspots/tv/tv on.webp', label: 'Videos', link: '/videos' },
+            { image: '/mobile/mobile_disc 1.webp', label: 'Music', link: '/music' },
+            { image: '/mobile/mobile_globe 1.webp', label: 'Tour', link: '/tour' },
+            { image: '/mobile/mobile_vhs 1.webp', label: 'Videos', link: '/videos' },
+            { image: '/mobile/mobile_phone 1.webp', label: 'Contact', link: '/about' },
+            { image: '/mobile/mobile_computer 1.webp', label: 'Merch', link: '/merch' },
           ]}
           hotspots={[
             {
