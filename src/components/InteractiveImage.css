@@ -1,8 +1,8 @@
 .interactive-image-container {
   position: relative;
   width: 100%;
-  max-width: 1600px;
-  margin: 0 auto;
+  height: calc(100vh - var(--footer-height, 100px));
+  height: calc(100dvh - var(--footer-height, 100px));
   overflow: hidden;
 }
 
@@ -24,7 +24,8 @@
 .base-image {
   display: block;
   width: 100%;
-  height: auto;
+  height: 100%;
+  object-fit: cover;
   user-select: none;
 }
 
@@ -184,6 +185,10 @@
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .interactive-image-container {
+    height: auto;
+  }
+
   /* Hide desktop canvas-based hotspots */
   .base-image,
   .hotspot-wrapper,
