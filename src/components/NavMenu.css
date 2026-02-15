@@ -28,8 +28,8 @@
   font-family: 'Roboto Mono', monospace;
   font-style: normal;
   font-weight: 400;
-  font-size: clamp(11px, 0.8vw, 16px);
-  line-height: clamp(13px, 0.95vw, 19px);
+  font-size: clamp(14px, 1.1vw, 22px);
+  line-height: clamp(17px, 1.3vw, 26px);
   text-transform: uppercase;
 }
 

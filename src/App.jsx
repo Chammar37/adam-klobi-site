@@ -33,7 +33,8 @@ const HOTSPOTS = [
     size: { width: 10, height: 15 },
     link: '/videos',
     zIndex: 5,
-    priority: 20
+    priority: 20,
+    glow: '#ffffff',
   },
   {
     id: 'computer',
