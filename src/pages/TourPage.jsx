@@ -5,7 +5,7 @@ import './TourPage.css'
 function TourPage() {
   return (
     <main className="tour-page">
-      <SignupForm text="BE THE FIRST TO KNOW" accentColor="#e63318" />
+      <SignupForm text="BE THE FIRST TO KNOW" accentColor="#e63318" source="tour" />
       <div className="tour-dates-section">
         <TourDates />
       </div>

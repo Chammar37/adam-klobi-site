@@ -4,6 +4,7 @@ import artistBio from './artistBio'
 import video from './video'
 import release from './release'
 import single from './single'
+import emailSignup from './emailSignup'
 
 export const schemaTypes = [
   tourDate,
@@ -11,5 +12,6 @@ export const schemaTypes = [
   artistBio,
   video,
   release,
-  single
+  single,
+  emailSignup
 ]

@@ -11,18 +11,6 @@ const MOBILE_ITEMS = [
 ]
 
 const HOTSPOTS = [
-  // {
-  //   id: 'guitar-case',
-  //   label: 'Tour',
-  //   image: '/hotspots/guitar_test.webp',
-  //   position: { x: 2, y: 48.5 },
-  //   size: { width: 42, height: 49 },
-  //   glow: '#0054ff',
-  //   link: '/tour',
-  //   zIndex: 10,
-  //   priority: 1,
-  //   enlarge: true,
-  // },
   {
     id: 'tv',
     label: 'Videos',
@@ -35,7 +23,6 @@ const HOTSPOTS = [
     link: '/videos',
     zIndex: 5,
     priority: 20,
-    glow: '#ffffff',
   },
   {
     id: 'computer',
@@ -58,6 +45,17 @@ const HOTSPOTS = [
     naturalWidth: 194,
     naturalHeight: 472,
     link: '/music',
+    glow: '#ffffff',
+  },
+  {
+    id: 'globe',
+    label: 'Tour',
+    image: '/hotspots/GLOBE-1.png',
+    position: { x: 70.3, y: 26.7 },
+    size: { width: 7, height: 14.1 },
+    naturalWidth: 399,
+    naturalHeight: 500,
+    link: '/tour',
     glow: '#ffffff',
   },
   {

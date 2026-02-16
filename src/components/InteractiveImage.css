@@ -159,24 +159,26 @@
 
 /* Custom glow effect - uses CSS variable for color */
 .hotspot-wrapper.has-glow .hotspot-image {
-  filter:
-    drop-shadow(0 0 6px var(--glow-color))
-    drop-shadow(0 0 14px var(--glow-color));
+  animation: glowPulse 3s ease-in-out infinite;
 }
 
 .hotspot-wrapper.has-glow.hovered .hotspot-image {
   filter:
     drop-shadow(0 0 10px var(--glow-color))
     drop-shadow(0 0 20px var(--glow-color));
-  animation: none; /* Stay lit on hover, no pulse */
+  animation: none;
 }
 
 @keyframes glowPulse {
   0%, 100% {
-    filter: drop-shadow(0 0 0px var(--glow-color));
+    filter:
+      drop-shadow(0 0 3px var(--glow-color))
+      drop-shadow(0 0 8px var(--glow-color));
   }
   50% {
-    filter: drop-shadow(0 0 5px var(--glow-color));
+    filter:
+      drop-shadow(0 0 8px var(--glow-color))
+      drop-shadow(0 0 18px var(--glow-color));
   }
 }
 

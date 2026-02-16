@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { screen } from '@testing-library/react'
+import { screen, fireEvent } from '@testing-library/react'
 import { renderWithRouter } from '../test/test-utils'
 import NavMenu from './NavMenu'
 
@@ -78,5 +78,99 @@ describe('NavMenu', () => {
     renderWithRouter(<NavMenu />)
     const logoLink = screen.getByAltText('Adam Klobi').closest('a')
     expect(logoLink).toHaveAttribute('href', '/')
+  })
+
+  // Hamburger is CSS-hidden on desktop (display: none outside ≤816px media query),
+  // so getByRole won't find it in jsdom. Use querySelector for DOM structure tests.
+  describe('hamburger menu', () => {
+    it('renders a hamburger button in the DOM', () => {
+      renderWithRouter(<NavMenu />, { route: '/music' })
+      const btn = document.querySelector('.hamburger')
+      expect(btn).toBeInTheDocument()
+      expect(btn).toHaveAttribute('aria-label', 'Open menu')
+    })
+
+    it('hamburger has aria-expanded false when closed', () => {
+      renderWithRouter(<NavMenu />, { route: '/music' })
+      const btn = document.querySelector('.hamburger')
+      expect(btn).toHaveAttribute('aria-expanded', 'false')
+    })
+
+    it('opens mobile overlay when hamburger is clicked', () => {
+      renderWithRouter(<NavMenu />, { route: '/music' })
+      fireEvent.click(document.querySelector('.hamburger'))
+      expect(document.querySelector('.mobile-nav-overlay')).toBeInTheDocument()
+      expect(document.querySelector('.hamburger')).toHaveAttribute('aria-label', 'Close menu')
+    })
+
+    it('hamburger has aria-expanded true when open', () => {
+      renderWithRouter(<NavMenu />, { route: '/music' })
+      fireEvent.click(document.querySelector('.hamburger'))
+      expect(document.querySelector('.hamburger')).toHaveAttribute('aria-expanded', 'true')
+    })
+
+    it('closes overlay when X is clicked', () => {
+      renderWithRouter(<NavMenu />, { route: '/music' })
+      fireEvent.click(document.querySelector('.hamburger'))
+      expect(document.querySelector('.mobile-nav-overlay')).toBeInTheDocument()
+      fireEvent.click(document.querySelector('.hamburger'))
+      expect(document.querySelector('.mobile-nav-overlay')).not.toBeInTheDocument()
+    })
+
+    it('mobile overlay contains 5 menu items (no Home)', () => {
+      renderWithRouter(<NavMenu />, { route: '/music' })
+      fireEvent.click(document.querySelector('.hamburger'))
+      const items = document.querySelectorAll('.mobile-nav-item')
+      expect(items).toHaveLength(5)
+      const labels = Array.from(items).map((el) => el.querySelector('span').textContent)
+      expect(labels).toEqual(['Music', 'Merch', 'Tour', 'About', 'Videos'])
+      expect(labels).not.toContain('Home')
+    })
+
+    it('mobile menu items have images', () => {
+      renderWithRouter(<NavMenu />, { route: '/music' })
+      fireEvent.click(document.querySelector('.hamburger'))
+      const items = document.querySelectorAll('.mobile-nav-item')
+      items.forEach((item) => {
+        expect(item.querySelector('img')).toBeInTheDocument()
+      })
+    })
+
+    it('mobile menu items have correct links', () => {
+      renderWithRouter(<NavMenu />, { route: '/music' })
+      fireEvent.click(document.querySelector('.hamburger'))
+      const links = document.querySelectorAll('.mobile-nav-overlay a')
+      const hrefs = Array.from(links).map((a) => a.getAttribute('href'))
+      expect(hrefs).toEqual(['/music', '/merch', '/tour', '/about', '/videos'])
+    })
+
+    it('locks body scroll when menu is open', () => {
+      renderWithRouter(<NavMenu />, { route: '/music' })
+      fireEvent.click(document.querySelector('.hamburger'))
+      expect(document.body.style.overflow).toBe('hidden')
+    })
+
+    it('unlocks body scroll when menu is closed', () => {
+      renderWithRouter(<NavMenu />, { route: '/music' })
+      fireEvent.click(document.querySelector('.hamburger'))
+      fireEvent.click(document.querySelector('.hamburger'))
+      expect(document.body.style.overflow).toBe('')
+    })
+
+    it('adds nav-menu--home class on home route', () => {
+      renderWithRouter(<NavMenu />, { route: '/' })
+      expect(document.querySelector('.nav-menu--home')).toBeInTheDocument()
+    })
+
+    it('does not add nav-menu--home class on non-home routes', () => {
+      renderWithRouter(<NavMenu />, { route: '/music' })
+      expect(document.querySelector('.nav-menu--home')).not.toBeInTheDocument()
+    })
+
+    it('hamburger is inside nav-menu--home on home page (CSS hides it)', () => {
+      renderWithRouter(<NavMenu />, { route: '/' })
+      const btn = document.querySelector('.hamburger')
+      expect(btn.closest('.nav-menu--home')).not.toBeNull()
+    })
   })
 })

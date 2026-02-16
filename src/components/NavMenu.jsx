@@ -1,8 +1,33 @@
+import { useState, useEffect } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import './NavMenu.css'
 
+const MOBILE_MENU_ITEMS = [
+  { label: 'Music', link: '/music', image: '/mobile/mobile_disc 1.webp', width: 209, height: 196 },
+  { label: 'Merch', link: '/merch', image: '/mobile/mobile_computer 1.webp', width: 375, height: 251 },
+  { label: 'Tour', link: '/tour', image: '/mobile/mobile_globe 1.webp', width: 208, height: 204 },
+  { label: 'About', link: '/about', image: '/mobile/mobile_phone 1.webp', width: 361, height: 214 },
+  { label: 'Videos', link: '/videos', image: '/mobile/mobile_vhs 1.webp', width: 249, height: 178 },
+]
+
 function NavMenu() {
   const { pathname } = useLocation()
+  const [isOpen, setIsOpen] = useState(false)
+
+  // Close menu on route change
+  useEffect(() => {
+    setIsOpen(false)
+  }, [pathname])
+
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = ''
+    }
+    return () => { document.body.style.overflow = '' }
+  }, [isOpen])
 
   return (
     <nav className={`nav-menu${pathname === '/' ? ' nav-menu--home' : ''}`}>
@@ -17,6 +42,37 @@ function NavMenu() {
         <li><Link to="/about" className={pathname === '/about' ? 'active' : ''}>About</Link></li>
         <li><Link to="/videos" className={pathname === '/videos' ? 'active' : ''}>Videos</Link></li>
       </ul>
+
+      <button
+        className={`hamburger${isOpen ? ' hamburger--open' : ''}`}
+        onClick={() => setIsOpen(!isOpen)}
+        aria-label={isOpen ? 'Close menu' : 'Open menu'}
+        aria-expanded={isOpen}
+      >
+        <span className="hamburger-bar" />
+        <span className="hamburger-bar" />
+        <span className="hamburger-bar" />
+      </button>
+
+      {isOpen && (
+        <div className="mobile-nav-overlay">
+          <div className="mobile-nav-items">
+            {MOBILE_MENU_ITEMS.map((item) => (
+              <Link
+                key={item.label}
+                to={item.link}
+                className={`mobile-nav-item${pathname === item.link ? ' active' : ''}`}
+                onClick={() => setIsOpen(false)}
+              >
+                {item.image && (
+                  <img src={item.image} alt={item.label} width={item.width} height={item.height} />
+                )}
+                <span>{item.label}</span>
+              </Link>
+            ))}
+          </div>
+        </div>
+      )}
     </nav>
   )
 }

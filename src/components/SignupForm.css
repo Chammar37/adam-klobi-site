@@ -40,13 +40,32 @@
   filter: brightness(0.85);
 }
 
+.signup-btn:disabled,
+.signup-input:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.signup-status {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  color: var(--accent-color);
+  margin-top: 0.75rem;
+}
+
+.signup-error {
+  color: #ff4444;
+}
+
 .signup-input {
   font-family: 'Roboto Mono', monospace;
   flex: 1;
   min-width: 0;
   padding: 0.65rem 0.75rem;
   font-size: 0.85rem;
-  color: #fff;
+  color: var(--accent-color);
   background: transparent;
   border: none;
   outline: none;

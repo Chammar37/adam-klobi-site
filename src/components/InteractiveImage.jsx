@@ -90,11 +90,34 @@ function useCoverTransform(containerRef, imageRef, objectPosition = [50, 50]) {
  */
 function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], objectPosition = [50, 50] }) {
   const [hoveredId, setHoveredId] = useState(null)
+  const [flickerId, setFlickerId] = useState(null)
   const canvasDataRef = useRef({})
   const preloadedRef = useRef(new Set())
   const containerRef = useRef(null)
   const imageRef = useRef(null)
   const navigate = useNavigate()
+
+  // Random TV flicker effect
+  useEffect(() => {
+    const flickerTarget = hotspots.find(h => h.id === 'tv' && h.hoverImage)
+    if (!flickerTarget) return
+
+    let timeout
+    const scheduleFlicker = () => {
+      const delay = 1000 + Math.random() * 3000
+      timeout = setTimeout(() => {
+        if (hoveredId !== 'tv') {
+          setFlickerId('tv')
+          const onDuration = 300 + Math.random() * 500
+          setTimeout(() => setFlickerId(null), onDuration)
+        }
+        scheduleFlicker()
+      }, delay)
+    }
+    scheduleFlicker()
+
+    return () => clearTimeout(timeout)
+  }, [hotspots, hoveredId])
 
   const { toContainer, toImage, onImageLoad } = useCoverTransform(containerRef, imageRef, objectPosition)
 
@@ -269,9 +292,9 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], ob
             }}
             aria-label={hotspot.label}
           >
-            {(hotspot.image || (hoveredId === hotspot.id && hotspot.hoverImage)) && (
+            {(hotspot.image || ((hoveredId === hotspot.id || flickerId === hotspot.id) && hotspot.hoverImage)) && (
               <img
-                src={hoveredId === hotspot.id && hotspot.hoverImage ? hotspot.hoverImage : hotspot.image}
+                src={(hoveredId === hotspot.id || flickerId === hotspot.id) && hotspot.hoverImage ? hotspot.hoverImage : hotspot.image}
                 alt={hotspot.label}
                 width={hotspot.naturalWidth}
                 height={hotspot.naturalHeight}
@@ -293,10 +316,6 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], ob
               />
             )}
 
-            {/* Label shown on hover */}
-            {hoveredId === hotspot.id && (
-              <span className="hotspot-label">{hotspot.label}</span>
-            )}
           </div>
         )
       })}
