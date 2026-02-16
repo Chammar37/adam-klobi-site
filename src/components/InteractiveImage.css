@@ -1,8 +1,8 @@
 .interactive-image-container {
   position: relative;
   width: 100%;
-  height: calc(100vh - var(--footer-height, 100px));
-  height: calc(100dvh - var(--footer-height, 100px));
+  height: 100vh;
+  height: 100dvh;
   overflow: hidden;
 }
 
@@ -110,6 +110,7 @@
   padding: 6px 12px;
   background: rgba(0, 0, 0, 0.85);
   color: #fff;
+  font-family: 'Roboto Mono', monospace;
   font-size: 14px;
   font-weight: 500;
   white-space: nowrap;

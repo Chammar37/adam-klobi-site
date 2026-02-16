@@ -16,7 +16,6 @@ function SignupForm({ text, accentColor }) {
     <div className="signup" style={{ '--accent-color': accentColor }}>
       <p className="signup-text">{text}</p>
       <form className="signup-form" onSubmit={handleSubmit}>
-        <button type="submit" className="signup-btn">SIGN UP</button>
         <input
           type="email"
           className="signup-input"
@@ -25,6 +24,7 @@ function SignupForm({ text, accentColor }) {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
+        <button type="submit" className="signup-btn">SIGN UP</button>
       </form>
     </div>
   )

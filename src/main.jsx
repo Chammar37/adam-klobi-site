@@ -28,8 +28,8 @@ function AppShell() {
           <Route path="/videos" element={<VideosPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
-        <Footer />
       </div>
+      <Footer />
     </>
   )
 }

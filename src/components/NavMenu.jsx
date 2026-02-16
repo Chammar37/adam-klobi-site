@@ -7,7 +7,7 @@ function NavMenu() {
   return (
     <nav className={`nav-menu${pathname === '/' ? ' nav-menu--home' : ''}`}>
       <Link to="/" className="nav-logo">
-        <img src="/Adam_Klobi_Logo.svg" alt="Adam Klobi" />
+        <img src="/Adam_Klobi_Logo.svg" alt="Adam Klobi" width={557} height={118} />
       </Link>
       <ul className="nav-links">
         <li><Link to="/" className={pathname === '/' ? 'active' : ''}>Home</Link></li>

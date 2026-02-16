@@ -7,6 +7,7 @@
 .tour-loading,
 .tour-error,
 .tour-empty {
+  font-family: 'Roboto Mono', monospace;
   text-align: center;
   padding: 2rem;
   color: #888;
@@ -41,6 +42,7 @@
 }
 
 .tour-month {
+  font-family: 'Roboto Mono', monospace;
   font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
@@ -48,6 +50,7 @@
 }
 
 .tour-day {
+  font-family: 'Roboto Mono', monospace;
   font-size: 1.75rem;
   font-weight: 700;
   line-height: 1.2;
@@ -55,6 +58,7 @@
 }
 
 .tour-year {
+  font-family: 'Roboto Mono', monospace;
   font-size: 0.75rem;
   color: #666;
 }
@@ -64,6 +68,7 @@
 }
 
 .tour-venue {
+  font-family: 'Roboto Mono', monospace;
   font-size: 1.1rem;
   font-weight: 600;
   color: #fff;
@@ -71,17 +76,20 @@
 }
 
 .tour-location {
+  font-family: 'Roboto Mono', monospace;
   font-size: 0.9rem;
   color: #888;
 }
 
 .tour-time {
+  font-family: 'Roboto Mono', monospace;
   font-size: 0.8rem;
   color: #666;
   margin-top: 0.25rem;
 }
 
 .tour-notes {
+  font-family: 'Roboto Mono', monospace;
   font-size: 0.8rem;
   font-style: italic;
   color: #666;
@@ -94,6 +102,7 @@
 }
 
 .ticket-button {
+  font-family: 'Roboto Mono', monospace;
   display: inline-block;
   padding: 0.75rem 1.5rem;
   font-size: 0.875rem;
@@ -112,6 +121,7 @@
 
 .sold-out-badge,
 .tba-badge {
+  font-family: 'Roboto Mono', monospace;
   padding: 0.5rem 1rem;
   font-size: 0.75rem;
   font-weight: 600;

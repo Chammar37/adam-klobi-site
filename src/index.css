@@ -17,19 +17,22 @@ body {
 
 #root {
   width: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
 }
 
-/* Page transition + sticky footer layout */
+/* Page transition */
 @keyframes fadeSlideIn {
   from { opacity: 0; transform: translateY(6px); }
   to { opacity: 1; transform: translateY(0); }
 }
 
 .page-transition {
+  flex: 1;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  min-height: 100dvh;
   animation: fadeSlideIn 0.45s ease;
 }
 

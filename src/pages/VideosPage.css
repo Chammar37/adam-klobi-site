@@ -34,6 +34,7 @@
 }
 
 .video-title {
+  font-family: 'Roboto Mono', monospace;
   margin-top: 0.75rem;
   font-size: 1rem;
   font-weight: 500;
@@ -44,6 +45,7 @@
 .videos-loading,
 .videos-error,
 .videos-empty {
+  font-family: 'Roboto Mono', monospace;
   text-align: center;
   padding: 4rem 0;
   color: rgba(255, 255, 255, 0.6);
