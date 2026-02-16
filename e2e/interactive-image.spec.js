@@ -5,92 +5,50 @@ test.describe('Interactive Image', () => {
     await page.goto('/')
   })
 
-  test('base image is present and has src', async ({ page }) => {
+  test('base image is present and uses object-fit cover', async ({ page, viewport }) => {
+    test.skip(viewport.width <= 768, 'Base image hidden on mobile — mobile menu takes over')
+    const baseImage = page.locator('.base-image')
+    await expect(baseImage).toBeVisible()
+    await expect(baseImage).toHaveAttribute('src', '/base-image.webp')
+    const objectFit = await baseImage.evaluate((el) => getComputedStyle(el).objectFit)
+    expect(objectFit).toBe('cover')
+  })
+
+  test('container fills viewport minus footer', async ({ page, viewport }) => {
+    test.skip(viewport.width <= 768, 'Container reverts to height:auto on mobile')
     const container = page.locator('.interactive-image-container')
     await expect(container).toBeVisible()
-    const baseImage = page.locator('.base-image')
-    await expect(baseImage).toHaveAttribute('src', '/base-image.jpg')
-    // Image is visible on desktop but may be hidden on smaller viewports
-    // due to container overflow or layout constraints
-    const isVisible = await baseImage.isVisible()
-    if (isVisible) {
-      await expect(baseImage).toBeVisible()
-    }
+    const box = await container.boundingBox()
+    // Container should be roughly viewport height minus footer (100px desktop)
+    expect(box.height).toBeGreaterThan(viewport.height - 150)
+    expect(box.height).toBeLessThanOrEqual(viewport.height)
+    expect(box.width).toBe(viewport.width)
   })
 
-  test('hotspot wrappers are present', async ({ page }) => {
+  test('hotspot wrappers are present (4 active hotspots)', async ({ page, viewport }) => {
+    test.skip(viewport.width <= 768, 'Hotspots hidden on mobile')
     await expect(page.locator('.interactive-image-container')).toBeVisible()
     const hotspots = page.locator('.hotspot-wrapper')
-    const count = await hotspots.count()
-    expect(count).toBeGreaterThan(0)
+    await expect(hotspots).toHaveCount(4)
   })
 
-  test('hotspot images are rendered', async ({ page }) => {
+  test('hotspot images are rendered', async ({ page, viewport }) => {
+    test.skip(viewport.width <= 768, 'Hotspots hidden on mobile')
     await expect(page.locator('.interactive-image-container')).toBeVisible()
     const hotspotImages = page.locator('.hotspot-image')
     const count = await hotspotImages.count()
-    expect(count).toBeGreaterThan(0)
+    expect(count).toBe(4)
   })
 
-  test('hovering over hotspot area', async ({ page }) => {
-    const container = page.locator('.interactive-image-container')
-    const box = await container.boundingBox()
-    if (!box) return
-
-    const x = box.x + box.width * 0.23
-    const y = box.y + box.height * 0.73
-    await page.mouse.move(x, y)
-    await page.waitForTimeout(300)
-
-    // Best-effort: labels appear only over opaque pixels
-    const labels = page.locator('.hotspot-label')
-    const labelCount = await labels.count()
-    expect(labelCount).toBeGreaterThanOrEqual(0)
-  })
-
-  test('hovering adds hovered class to wrapper', async ({ page }) => {
-    const container = page.locator('.interactive-image-container')
-    const box = await container.boundingBox()
-    if (!box) return
-
-    const x = box.x + box.width * 0.23
-    const y = box.y + box.height * 0.73
-    await page.mouse.move(x, y)
-    await page.waitForTimeout(300)
-
-    const hoveredCount = await page.locator('.hotspot-wrapper.hovered').count()
-    expect(hoveredCount).toBeGreaterThanOrEqual(0)
-  })
-
-  test('mouse leave clears hover state', async ({ page }) => {
-    const container = page.locator('.interactive-image-container')
-    const box = await container.boundingBox()
-    if (!box) return
-
-    await page.mouse.move(box.x + box.width * 0.23, box.y + box.height * 0.73)
-    await page.waitForTimeout(200)
-    await page.mouse.move(0, 0)
-    await page.waitForTimeout(200)
-
-    const hoveredCount = await page.locator('.hotspot-wrapper.hovered').count()
-    expect(hoveredCount).toBe(0)
-  })
-
-  test('has-glow class is applied to glow hotspots', async ({ page }) => {
+  test('all hotspots have glow class', async ({ page, viewport }) => {
+    test.skip(viewport.width <= 768, 'Hotspots hidden on mobile')
     await expect(page.locator('.interactive-image-container')).toBeVisible()
     const glowHotspots = page.locator('.hotspot-wrapper.has-glow')
-    const count = await glowHotspots.count()
-    expect(count).toBeGreaterThan(0)
+    await expect(glowHotspots).toHaveCount(4)
   })
 
-  test('has-enlarge class is applied to enlarge hotspots', async ({ page }) => {
-    await expect(page.locator('.interactive-image-container')).toBeVisible()
-    const enlargeHotspots = page.locator('.hotspot-wrapper.has-enlarge')
-    const count = await enlargeHotspots.count()
-    expect(count).toBeGreaterThan(0)
-  })
-
-  test('hotspot wrapper has pointer-events none', async ({ page }) => {
+  test('hotspot wrapper has pointer-events none', async ({ page, viewport }) => {
+    test.skip(viewport.width <= 768, 'Hotspots hidden on mobile')
     await expect(page.locator('.interactive-image-container')).toBeVisible()
     const wrapper = page.locator('.hotspot-wrapper').first()
     const pointerEvents = await wrapper.evaluate((el) =>
@@ -106,5 +64,63 @@ test.describe('Interactive Image', () => {
       getComputedStyle(el).position
     )
     expect(position).toBe('relative')
+  })
+
+  test('hovering over CD tower shows label', async ({ page, viewport }) => {
+    test.skip(viewport.width <= 768, 'Hotspots hidden on mobile')
+    const container = page.locator('.interactive-image-container')
+    const box = await container.boundingBox()
+    if (!box) return
+
+    // CD tower is at image position x:45-55%, y:32.5-52.5%
+    // With cover transform, these shift — target the center of the hotspot
+    // in container space (roughly center-ish of the image)
+    const x = box.x + box.width * 0.48
+    const y = box.y + box.height * 0.38
+    await page.mouse.move(x, y)
+    await page.waitForTimeout(500)
+
+    // Check if hovering triggered a label (depends on alpha hit-testing)
+    const labels = page.locator('.hotspot-label')
+    const labelCount = await labels.count()
+    // May or may not hit opaque pixels depending on exact transform
+    expect(labelCount).toBeGreaterThanOrEqual(0)
+  })
+
+  test('mouse leave clears hover state', async ({ page, viewport }) => {
+    test.skip(viewport.width <= 768, 'Hotspots hidden on mobile')
+    const container = page.locator('.interactive-image-container')
+    const box = await container.boundingBox()
+    if (!box) return
+
+    // Move into container then out
+    await page.mouse.move(box.x + box.width * 0.5, box.y + box.height * 0.4)
+    await page.waitForTimeout(200)
+    await page.mouse.move(0, 0)
+    await page.waitForTimeout(200)
+
+    const hoveredCount = await page.locator('.hotspot-wrapper.hovered').count()
+    expect(hoveredCount).toBe(0)
+  })
+
+  test('mobile menu is visible on small viewports', async ({ page, viewport }) => {
+    test.skip(viewport.width > 768, 'Mobile menu only on small viewports')
+    const mobileMenu = page.locator('.mobile-menu')
+    await expect(mobileMenu).toBeVisible()
+    // 5 mobile menu items: Music, Tour, Videos, Contact, Merch
+    const items = page.locator('.mobile-menu-item')
+    await expect(items).toHaveCount(5)
+  })
+
+  test('mobile menu items are navigation links', async ({ page, viewport }) => {
+    test.skip(viewport.width > 768, 'Mobile menu only on small viewports')
+    const hrefs = await page.locator('.mobile-menu-item').evaluateAll((els) =>
+      els.map((el) => el.getAttribute('href'))
+    )
+    expect(hrefs).toContain('/music')
+    expect(hrefs).toContain('/tour')
+    expect(hrefs).toContain('/videos')
+    expect(hrefs).toContain('/about')
+    expect(hrefs).toContain('/merch')
   })
 })

@@ -34,6 +34,20 @@ export default defineType({
       description: 'Where the PRE-SAVE button links to (e.g. Spotify, Apple Music, or a smartlink)'
     }),
     defineField({
+      name: 'buttonLabel',
+      title: 'Button Label',
+      type: 'string',
+      description: 'Text shown on the action button',
+      options: {
+        list: [
+          { title: 'Pre-Save', value: 'PRE-SAVE' },
+          { title: 'Listen', value: 'LISTEN' }
+        ],
+        layout: 'radio'
+      },
+      initialValue: 'PRE-SAVE'
+    }),
+    defineField({
       name: 'releaseDate',
       title: 'Release Date',
       type: 'date'

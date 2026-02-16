@@ -1,20 +1,11 @@
-import { describe, it, expect, vi } from 'vitest'
+import { describe, it, expect } from 'vitest'
 import { screen } from '@testing-library/react'
 import { renderWithRouter } from '../test/test-utils'
 import MerchPage from './MerchPage'
 
-vi.mock('../components/MerchGrid', () => ({
-  default: () => <div data-testid="merch-grid">MerchGrid Mock</div>,
-}))
-
 describe('MerchPage', () => {
-  it('renders Merch title', () => {
+  it('renders signup text', () => {
     renderWithRouter(<MerchPage />)
-    expect(screen.getByText('Merch')).toBeInTheDocument()
-  })
-
-  it('renders MerchGrid component', () => {
-    renderWithRouter(<MerchPage />)
-    expect(screen.getByTestId('merch-grid')).toBeInTheDocument()
+    expect(screen.getByText('SIGN UP FOR MERCH UPDATES')).toBeInTheDocument()
   })
 })

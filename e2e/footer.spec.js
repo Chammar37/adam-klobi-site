@@ -29,14 +29,15 @@ test.describe('Footer', () => {
     expect(hrefs).toContain('https://youtube.com/@adamklobi')
     expect(hrefs).toContain('https://tiktok.com/@adamklobi')
     expect(hrefs).toContain('https://instagram.com/adam.klobi')
-    expect(hrefs).toContain('https://wa.me/adamklobi')
+    expect(hrefs).toContain('sms:555740382')
   })
 
-  test('social links open in new tab', async ({ page }) => {
+  test('external social links open in new tab', async ({ page }) => {
     await page.goto('/')
-    const targets = await page.locator('.footer-socials a').evaluateAll((els) =>
+    const targets = await page.locator('.footer-socials a[target="_blank"]').evaluateAll((els) =>
       els.map((el) => el.target)
     )
+    expect(targets).toHaveLength(5)
     targets.forEach((target) => {
       expect(target).toBe('_blank')
     })

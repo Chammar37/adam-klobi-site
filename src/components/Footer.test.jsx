@@ -47,24 +47,23 @@ describe('Footer', () => {
     expect(link).toHaveAttribute('href', 'https://instagram.com/adam.klobi')
   })
 
-  it('has WhatsApp link with correct href', () => {
+  it('has Text link with correct href', () => {
     renderWithRouter(<Footer />)
-    const link = screen.getByLabelText('WhatsApp')
-    expect(link).toHaveAttribute('href', 'https://wa.me/adamklobi')
+    const link = screen.getByLabelText('Text')
+    expect(link).toHaveAttribute('href', 'sms:555740382')
   })
 
-  it('all social links open in new tab', () => {
+  it('external social links open in new tab', () => {
     renderWithRouter(<Footer />)
-    const links = screen.getAllByRole('link')
-    links.forEach((link) => {
+    const externalLinks = [
+      screen.getByLabelText('Spotify'),
+      screen.getByLabelText('Apple Music'),
+      screen.getByLabelText('YouTube'),
+      screen.getByLabelText('TikTok'),
+      screen.getByLabelText('Instagram'),
+    ]
+    externalLinks.forEach((link) => {
       expect(link).toHaveAttribute('target', '_blank')
-    })
-  })
-
-  it('all social links have noopener noreferrer', () => {
-    renderWithRouter(<Footer />)
-    const links = screen.getAllByRole('link')
-    links.forEach((link) => {
       expect(link).toHaveAttribute('rel', 'noopener noreferrer')
     })
   })

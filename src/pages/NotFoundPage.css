@@ -1,0 +1,23 @@
+.not-found-page {
+  min-height: 100vh;
+  background: url('/ak_tour.webp') center center / cover no-repeat;
+  background-color: #111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem 4rem;
+}
+
+.not-found-text {
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  color: #fff;
+}
+
+@media (max-width: 768px) {
+  .not-found-page {
+    padding: 5rem 1rem 3rem;
+  }
+}

@@ -1,15 +1,10 @@
-import MerchGrid from '../components/MerchGrid'
-import '../App.css'
+import SignupForm from '../components/SignupForm'
+import './MerchPage.css'
 
 function MerchPage() {
   return (
-    <main>
-      <section className="content-section">
-        <div className="section-container">
-          <h2 className="section-title">Merch</h2>
-          <MerchGrid />
-        </div>
-      </section>
+    <main className="merch-page">
+      <SignupForm text="SIGN UP FOR MERCH UPDATES" accentColor="#3344ff" />
     </main>
   )
 }

@@ -1,0 +1,16 @@
+.merch-page {
+  min-height: 100vh;
+  background: url('/ak_merch.webp') center center / cover no-repeat;
+  background-color: #111;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 2rem 4rem;
+}
+
+@media (max-width: 768px) {
+  .merch-page {
+    padding: 5rem 1rem 3rem;
+  }
+}

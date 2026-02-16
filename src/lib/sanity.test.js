@@ -33,16 +33,6 @@ describe('Sanity lib (unconfigured)', () => {
     expect(result).toEqual([])
   })
 
-  it('fetchMerchItems returns empty array', async () => {
-    const result = await sanity.fetchMerchItems()
-    expect(result).toEqual([])
-  })
-
-  it('fetchArtistBio returns null', async () => {
-    const result = await sanity.fetchArtistBio()
-    expect(result).toBeNull()
-  })
-
   it('fetchLatestRelease returns null', async () => {
     const result = await sanity.fetchLatestRelease()
     expect(result).toBeNull()

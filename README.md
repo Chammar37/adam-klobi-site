@@ -1,87 +1,84 @@
-# PNG Hotspot Interactive Image
+# Adam Klobi Site
 
-Interactive image component using PNG cutout overlays instead of SVG paths.
+Artist website built with React 19, Vite, and Sanity CMS. Deployed on Cloudflare Pages.
 
 ## Setup
 
 ```bash
 npm install
 npm run dev
+# Opens at http://localhost:5174
 ```
 
-## How It Works
+## Architecture
 
-1. **Base Image** - Full scene image displayed as background
-2. **PNG Cutouts** - Tightly cropped transparent PNGs positioned over hotspots
-3. **Jiggle Animation** - Cutouts animate on hover
-4. **Click Navigation** - Clicks scroll to sections or navigate to URLs
+- **React 19 + Vite 6** — SPA with React Router DOM
+- **Sanity CMS** — Headless CMS for music, tour dates, and videos
+- **Shopify Buy SDK** — Headless commerce for merch (integration scaffolded, not active)
+- **Cloudflare Pages** — Hosting with Wrangler CLI
 
-## Adding Hotspots
+### Pages
 
-### 1. Prepare Your Assets
+| Route | Component | Content Source |
+|-------|-----------|---------------|
+| `/` | `App.jsx` | Static — interactive image with hotspot navigation |
+| `/music` | `MusicPage.jsx` | Sanity — hero release + singles |
+| `/tour` | `TourPage.jsx` | Sanity — upcoming tour dates + signup form |
+| `/merch` | `MerchPage.jsx` | Static — signup form (Shopify integration planned) |
+| `/videos` | `VideosPage.jsx` | Sanity — YouTube embeds |
+| `/about` | `AboutPage.jsx` | Static — bio + contact info |
 
-Place in `public/`:
-- `base-image.jpg` - Your full scene image
-- `hotspots/[name].png` - Tightly cropped PNG cutouts with transparency
+### Interactive Image
 
-**PNG Cutout Tips:**
-- Crop tightly around the object (minimize transparent padding)
-- Use PNG-24 for smooth edges
-- Export at 2x resolution for retina displays
+The home page uses a viewport-filling `object-fit: cover` image with PNG cutout hotspots overlaid. A coordinate transform (`useCoverTransform`) maps hotspot positions from image space to container space as the viewport resizes. Canvas-based alpha hit-testing ensures only opaque pixels trigger interactions.
 
-### 2. Configure Hotspots
+See `VIEWPORT-IMAGE-ARCHITECTURE.md` for full details.
 
-In `App.jsx`, add to the `hotspots` array:
-
-```jsx
-{
-  id: 'unique-id',
-  label: 'Display Label',
-  image: '/hotspots/your-cutout.png',
-  position: { x: 45, y: 30 },  // % from top-left of container
-  size: { width: 15, height: 20 },  // % of container (optional)
-  link: '#section-id'  // or full URL
-}
-```
-
-### 3. Position Calibration
-
-To find the correct `position` values:
-1. Open your base image in an image editor
-2. Note the pixel coordinates of your hotspot's top-left corner
-3. Convert to percentages: `x% = (pixelX / imageWidth) * 100`
-
-## File Structure
+## Project Structure
 
 ```
-public/
-├── base-image.jpg          # Main scene
-└── hotspots/
-    ├── guitar.png          # Cutout 1
-    ├── amp.png             # Cutout 2
-    └── poster.png          # Cutout 3
-
 src/
 ├── components/
-│   ├── InteractiveImage.jsx
-│   └── InteractiveImage.css
-└── App.jsx                 # Hotspot configuration
+│   ├── InteractiveImage.jsx  # Viewport-filling image with hotspots
+│   ├── NavMenu.jsx           # Navigation bar
+│   ├── Footer.jsx            # Social links footer
+│   ├── TourDates.jsx         # Tour dates from Sanity
+│   └── SignupForm.jsx        # Shared email signup form
+├── pages/
+│   ├── MusicPage.jsx         # Hero release + singles grid
+│   ├── TourPage.jsx          # Signup + tour dates
+│   ├── MerchPage.jsx         # Signup (Shopify planned)
+│   ├── VideosPage.jsx        # YouTube embeds
+│   └── AboutPage.jsx         # Bio + contact
+├── lib/
+│   ├── sanity.js             # Sanity client & queries
+│   └── shopify.js            # Shopify Buy SDK client
+└── App.jsx                   # Home page + hotspot config
+
+studio/                       # Sanity Studio
+public/
+├── hotspots/                 # WebP cutout images
+├── mobile/                   # Mobile menu item images
+└── music/                    # Music page assets
 ```
 
-## Customizing Animations
+## Testing
 
-Edit `InteractiveImage.css`:
+```bash
+# Unit tests (Vitest + Testing Library)
+npx vitest run
 
-```css
-/* Adjust jiggle intensity */
-@keyframes jiggle {
-  0%, 100% { transform: rotate(-2deg) scale(1.02); }
-  50% { transform: rotate(2deg) scale(1.03); }
-}
+# E2E tests (Playwright — 3 viewports: 1440, 768, 375)
+npx playwright test
+```
 
-/* Or use a bounce effect instead */
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-5px); }
-}
+## CMS
+
+See `CMS-README.md` for Sanity setup and content type documentation.
+
+## Deployment
+
+```bash
+npm run build
+npx wrangler pages deploy dist
 ```

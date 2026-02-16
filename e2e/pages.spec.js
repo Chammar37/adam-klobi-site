@@ -13,9 +13,9 @@ test.describe('Page smoke tests', () => {
     await expect(page).toHaveURL('/music')
   })
 
-  test('merch page loads with heading', async ({ page }) => {
+  test('merch page loads', async ({ page }) => {
     await page.goto('/merch')
-    await expect(page.locator('h2', { hasText: 'Merch' })).toBeVisible()
+    await expect(page.locator('.merch-page')).toBeVisible()
   })
 
   test('tour page loads', async ({ page }) => {

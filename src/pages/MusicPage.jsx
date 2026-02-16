@@ -6,6 +6,7 @@ function MusicPage() {
   const [release, setRelease] = useState(null)
   const [singles, setSingles] = useState([])
   const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(null)
 
   useEffect(() => {
     const load = async () => {
@@ -17,6 +18,7 @@ function MusicPage() {
         setRelease(releaseData)
         setSingles(singlesData)
       } catch (err) {
+        setError('Failed to load music')
         console.error(err)
       } finally {
         setLoading(false)
@@ -29,27 +31,23 @@ function MusicPage() {
     return <main className="music-loading">Loading...</main>
   }
 
+  if (error) {
+    return <main className="music-loading">{error}</main>
+  }
+
   return (
     <main>
-      {/* Hero Album — side-by-side layout */}
+      {/* Hero Album — centered over background image */}
       {release && (
         <section className="music-page-hero">
-          <div className="music-hero-inner">
-            <div className="music-hero-info">
-              {release.description && (
-                <p className="music-hero-description">{release.description}</p>
-              )}
-              {release.link && (
-                <a
-                  href={release.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="music-hero-btn"
-                >
-                  PRE-SAVE
-                </a>
-              )}
-            </div>
+          <img
+            className="music-hero-bg"
+            src="/music/tracklist-website-fade.webp"
+            alt=""
+            width={1280}
+            height={3107}
+          />
+          <div className="music-hero-content">
             <div className="music-hero-artwork">
               {release.artwork && (
                 <img
@@ -58,19 +56,26 @@ function MusicPage() {
                 />
               )}
             </div>
+            {release.title && (
+              <h2 className="music-hero-title">{release.title}</h2>
+            )}
+            {release.description && (
+              <p className="music-hero-description">{release.description}</p>
+            )}
+            {release.link && (
+              <a
+                href={release.link}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="music-hero-btn"
+              >
+                {release.buttonLabel || 'PRE-SAVE'}
+              </a>
+            )}
           </div>
         </section>
       )}
 
-      {/* Supporting image beneath hero */}
-      {release?.supportingImage && (
-        <section className="music-supporting-image">
-          <img
-            src={urlFor(release.supportingImage).width(800).url()}
-            alt={`${release.title} tracklist`}
-          />
-        </section>
-      )}
 
       {/* Singles — stacked centered layout */}
       {singles.length > 0 && (
@@ -82,9 +87,13 @@ function MusicPage() {
                   <img
                     src={urlFor(single.artwork).width(600).url()}
                     alt={single.title}
+                    loading="lazy"
                   />
                 )}
               </div>
+              {single.title && (
+                <h3 className="single-title">{single.title}</h3>
+              )}
               {single.description && (
                 <p className="single-description">{single.description}</p>
               )}
@@ -95,7 +104,7 @@ function MusicPage() {
                   rel="noopener noreferrer"
                   className="single-btn"
                 >
-                  PRE-SAVE
+                  {single.buttonLabel || 'PRE-SAVE'}
                 </a>
               )}
             </div>

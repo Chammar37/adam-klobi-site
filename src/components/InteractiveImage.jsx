@@ -91,6 +91,7 @@ function useCoverTransform(containerRef, imageRef, objectPosition = [50, 50]) {
 function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], objectPosition = [50, 50] }) {
   const [hoveredId, setHoveredId] = useState(null)
   const canvasDataRef = useRef({})
+  const preloadedRef = useRef(new Set())
   const containerRef = useRef(null)
   const imageRef = useRef(null)
   const navigate = useNavigate()
@@ -123,6 +124,7 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], ob
       if (hotspot.hoverImage) {
         const hoverImg = new Image()
         hoverImg.src = hotspot.hoverImage
+        preloadedRef.current.add(hoverImg)
       }
     })
   }, [hotspots])
@@ -220,6 +222,8 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], ob
           <img
             src={logo.src}
             alt={logo.alt || 'Logo'}
+            width={logo.width}
+            height={logo.height}
             className="image-logo"
             draggable={false}
           />
@@ -232,6 +236,8 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], ob
         src={baseImage}
         alt="Interactive scene"
         className="base-image"
+        width={5634}
+        height={3761}
         draggable={false}
         fetchPriority="high"
         onLoad={onImageLoad}
@@ -267,6 +273,8 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], ob
               <img
                 src={hoveredId === hotspot.id && hotspot.hoverImage ? hotspot.hoverImage : hotspot.image}
                 alt={hotspot.label}
+                width={hotspot.naturalWidth}
+                height={hotspot.naturalHeight}
                 className={`hotspot-image ${hotspot.hoverImageSize ? 'custom-size' : ''}`}
                 style={
                   hoveredId === hotspot.id && hotspot.hoverImageSize
@@ -297,15 +305,15 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], ob
       {mobileItems.length > 0 && (
         <div className="mobile-menu" onClick={(e) => e.stopPropagation()}>
           <div className="mobile-menu-bg">
-            <img src={baseImage} alt="" draggable={false} />
+            <img src={baseImage} alt="" width={5634} height={3761} draggable={false} />
           </div>
           <div className="mobile-menu-logo">
-            <img src="/Adam_Klobi_Logo.svg" alt="Adam Klobi" draggable={false} />
+            <img src="/Adam_Klobi_Logo.svg" alt="Adam Klobi" width={557} height={118} draggable={false} />
           </div>
           <div className="mobile-menu-items">
             {mobileItems.map((item) => (
               <Link key={item.label} to={item.link} className="mobile-menu-item">
-                <img src={item.image} alt={item.label} />
+                <img src={item.image} alt={item.label} width={item.width} height={item.height} />
                 <span>{item.label}</span>
               </Link>
             ))}

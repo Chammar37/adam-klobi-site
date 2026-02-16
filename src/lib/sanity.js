@@ -40,36 +40,6 @@ export const fetchTourDates = async () => {
   `)
 }
 
-export const fetchMerchItems = async () => {
-  if (!client) return []
-  return client.fetch(`
-    *[_type == "merchItem"] | order(featured desc) {
-      _id,
-      title,
-      image,
-      price,
-      shopifyProductId,
-      description,
-      featured
-    }
-  `)
-}
-
-export const fetchArtistBio = async () => {
-  if (!client) return null
-  return client.fetch(`
-    *[_type == "artistBio"][0] {
-      _id,
-      name,
-      bio,
-      pressPhoto,
-      pressPhotos,
-      contactEmail,
-      socialLinks
-    }
-  `)
-}
-
 export const fetchLatestRelease = async () => {
   if (!client) return null
   return client.fetch(`
@@ -80,6 +50,7 @@ export const fetchLatestRelease = async () => {
       artwork,
       supportingImage,
       link,
+      buttonLabel,
       releaseDate
     }
   `)
@@ -94,6 +65,7 @@ export const fetchSingles = async () => {
       description,
       artwork,
       link,
+      buttonLabel,
       releaseDate
     }
   `)

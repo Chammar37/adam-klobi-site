@@ -1,14 +1,13 @@
 import InteractiveImage from './components/InteractiveImage'
-import './App.css'
 
 const OBJECT_POSITION = [50, 35]
 
 const MOBILE_ITEMS = [
-  { image: '/mobile/mobile_disc 1.webp', label: 'Music', link: '/music' },
-  { image: '/mobile/mobile_globe 1.webp', label: 'Tour', link: '/tour' },
-  { image: '/mobile/mobile_vhs 1.webp', label: 'Videos', link: '/videos' },
-  { image: '/mobile/mobile_phone 1.webp', label: 'Contact', link: '/about' },
-  { image: '/mobile/mobile_computer 1.webp', label: 'Merch', link: '/merch' },
+  { image: '/mobile/mobile_disc 1.webp', label: 'Music', link: '/music', width: 209, height: 196 },
+  { image: '/mobile/mobile_globe 1.webp', label: 'Tour', link: '/tour', width: 208, height: 204 },
+  { image: '/mobile/mobile_vhs 1.webp', label: 'Videos', link: '/videos', width: 249, height: 178 },
+  { image: '/mobile/mobile_phone 1.webp', label: 'Contact', link: '/about', width: 361, height: 214 },
+  { image: '/mobile/mobile_computer 1.webp', label: 'Merch', link: '/merch', width: 375, height: 251 },
 ]
 
 const HOTSPOTS = [
@@ -31,6 +30,8 @@ const HOTSPOTS = [
     hoverImage: '/hotspots/tv/tv on.webp',
     position: { x: 5, y: 48 },
     size: { width: 10, height: 15 },
+    naturalWidth: 442,
+    naturalHeight: 419,
     link: '/videos',
     zIndex: 5,
     priority: 20,
@@ -43,6 +44,8 @@ const HOTSPOTS = [
     hoverImage: '/hotspots/computer/computer on.webp',
     position: { x: 80, y: 30 },
     size: { width: 12, height: 18 },
+    naturalWidth: 579,
+    naturalHeight: 491,
     link: '/merch',
     glow: '#ffffff',
   },
@@ -52,6 +55,8 @@ const HOTSPOTS = [
     image: '/hotspots/CD tower.webp',
     position: { x: 45, y: 32.5 },
     size: { width: 10, height: 20 },
+    naturalWidth: 194,
+    naturalHeight: 472,
     link: '/music',
     glow: '#ffffff',
   },
@@ -62,6 +67,8 @@ const HOTSPOTS = [
     hoverImage: '/hotspots/camera/silver_cam_on.webp',
     position: { x: 24, y: 39 },
     size: { width: 6, height: 7 },
+    naturalWidth: 290,
+    naturalHeight: 227,
     link: '/about',
     glow: '#ffffff',
   },
