@@ -1,7 +1,7 @@
 /* ── Hero Album — centered over background image ── */
 
 :root {
-  --music-artwork-width: clamp(160px, 32vw, 400px);
+  --music-artwork-width: clamp(160px, 32vw, 600px);
 }
 
 .music-page-hero {
@@ -122,7 +122,7 @@
 }
 
 .single-card:first-child {
-  margin-top: -40rem;
+  margin-top: -34rem;
 }
 
 .single-artwork img {

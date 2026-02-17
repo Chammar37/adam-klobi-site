@@ -191,7 +191,6 @@
 @media (max-width: 768px) {
   .interactive-image-container {
     height: auto;
-    overflow: visible;
   }
 
   /* Hide desktop canvas-based hotspots */
@@ -204,18 +203,16 @@
   /* Show mobile menu */
   .mobile-menu {
     display: block;
-    position: relative;
-    width: 100%;
-    min-height: 100vh;
+    position: fixed;
+    inset: 0;
+    overflow-y: auto;
   }
 
   .mobile-menu-bg {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100svh;
-    z-index: -1;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
   }
 
   .mobile-menu-bg img {

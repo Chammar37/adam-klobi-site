@@ -20,6 +20,10 @@
   display: block;
 }
 
+.nav-logo--hidden {
+  visibility: hidden;
+}
+
 .nav-logo img {
   display: block;
   width: clamp(240px, 30vw, 480px);
@@ -155,7 +159,8 @@
 .mobile-nav-item img {
   width: 36vw;
   max-width: 180px;
-  height: auto;
+  height: 24vw;
+  max-height: 115px;
   object-fit: contain;
 }
 
@@ -252,6 +257,7 @@
     opacity: 1;
   }
 
+  .mobile-nav-logo,
   .mobile-nav-items {
     animation: none;
     opacity: 1;
