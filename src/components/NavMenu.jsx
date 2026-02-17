@@ -6,8 +6,8 @@ const MOBILE_MENU_ITEMS = [
   { label: 'Music', link: '/music', image: '/mobile/mobile_disc 1.webp', width: 209, height: 196 },
   { label: 'Merch', link: '/merch', image: '/mobile/mobile_computer 1.webp', width: 375, height: 251 },
   { label: 'Tour', link: '/tour', image: '/mobile/mobile_globe 1.webp', width: 208, height: 204 },
-  { label: 'About', link: '/about', image: '/mobile/mobile_phone 1.webp', width: 361, height: 214 },
   { label: 'Videos', link: '/videos', image: '/mobile/mobile_vhs 1.webp', width: 249, height: 178 },
+  { label: 'About', link: '/about', image: '/mobile/mobile_phone 1.webp', width: 361, height: 214 },
 ]
 
 function NavMenu() {
@@ -39,8 +39,8 @@ function NavMenu() {
         <li><Link to="/music" className={pathname === '/music' ? 'active' : ''}>Music</Link></li>
         <li><Link to="/merch" className={pathname === '/merch' ? 'active' : ''}>Merch</Link></li>
         <li><Link to="/tour" className={pathname === '/tour' ? 'active' : ''}>Tour</Link></li>
-        <li><Link to="/about" className={pathname === '/about' ? 'active' : ''}>About</Link></li>
         <li><Link to="/videos" className={pathname === '/videos' ? 'active' : ''}>Videos</Link></li>
+        <li><Link to="/about" className={pathname === '/about' ? 'active' : ''}>About</Link></li>
       </ul>
 
       <button

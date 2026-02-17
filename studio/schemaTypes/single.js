@@ -31,7 +31,8 @@ export default defineType({
       name: 'link',
       title: 'Pre-save / Streaming Link',
       type: 'url',
-      description: 'Where the PRE-SAVE button links to (e.g. Spotify, Apple Music, or a smartlink)'
+      description: 'Where the PRE-SAVE button links to (e.g. Spotify, Apple Music, or a smartlink)',
+      validation: (Rule) => Rule.required()
     }),
     defineField({
       name: 'buttonLabel',

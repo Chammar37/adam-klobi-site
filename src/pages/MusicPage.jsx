@@ -42,7 +42,7 @@ function MusicPage() {
         <section className="music-page-hero">
           <img
             className="music-hero-bg"
-            src="/music/tracklist-website-fade.webp"
+            src="/music/tracklist-website-fade.png"
             alt=""
             width={1280}
             height={3107}

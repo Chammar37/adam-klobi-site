@@ -4,10 +4,10 @@ const OBJECT_POSITION = [50, 35]
 
 const MOBILE_ITEMS = [
   { image: '/mobile/mobile_disc 1.webp', label: 'Music', link: '/music', width: 209, height: 196 },
+  { image: '/mobile/mobile_computer 1.webp', label: 'Merch', link: '/merch', width: 375, height: 251 },
   { image: '/mobile/mobile_globe 1.webp', label: 'Tour', link: '/tour', width: 208, height: 204 },
   { image: '/mobile/mobile_vhs 1.webp', label: 'Videos', link: '/videos', width: 249, height: 178 },
-  { image: '/mobile/mobile_phone 1.webp', label: 'Contact', link: '/about', width: 361, height: 214 },
-  { image: '/mobile/mobile_computer 1.webp', label: 'Merch', link: '/merch', width: 375, height: 251 },
+  { image: '/mobile/mobile_phone 1.webp', label: 'About', link: '/about', width: 361, height: 214 },
 ]
 
 const HOTSPOTS = [

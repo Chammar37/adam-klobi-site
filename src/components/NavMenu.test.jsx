@@ -123,7 +123,7 @@ describe('NavMenu', () => {
       const items = document.querySelectorAll('.mobile-nav-item')
       expect(items).toHaveLength(5)
       const labels = Array.from(items).map((el) => el.querySelector('span').textContent)
-      expect(labels).toEqual(['Music', 'Merch', 'Tour', 'About', 'Videos'])
+      expect(labels).toEqual(['Music', 'Merch', 'Tour', 'Videos', 'About'])
       expect(labels).not.toContain('Home')
     })
 
@@ -141,7 +141,7 @@ describe('NavMenu', () => {
       fireEvent.click(document.querySelector('.hamburger'))
       const links = document.querySelectorAll('.mobile-nav-overlay a')
       const hrefs = Array.from(links).map((a) => a.getAttribute('href'))
-      expect(hrefs).toEqual(['/music', '/merch', '/tour', '/about', '/videos'])
+      expect(hrefs).toEqual(['/music', '/merch', '/tour', '/videos', '/about'])
     })
 
     it('locks body scroll when menu is open', () => {

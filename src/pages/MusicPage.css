@@ -1,5 +1,9 @@
 /* ── Hero Album — centered over background image ── */
 
+:root {
+  --music-artwork-width: clamp(160px, 32vw, 400px);
+}
+
 .music-page-hero {
   position: relative;
   overflow: hidden;
@@ -21,12 +25,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 12%;
-  gap: 1.2vw;
+  padding-top: 10%;
+  gap: 1vw;
 }
 
 .music-hero-artwork {
-  width: 30%;
+  width: var(--music-artwork-width);
 }
 
 .music-hero-artwork img {
@@ -81,8 +85,12 @@
 /* ── Singles — stacked centered ── */
 
 .music-singles {
-  background: #000;
+  position: relative;
+  z-index: 1;
+  background: transparent;
+  margin-top: -12rem;
   padding: 4rem 2rem;
+  padding-top: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -93,9 +101,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 1.25rem;
-  max-width: clamp(280px, 30vw, 480px);
-  width: 100%;
+  gap: 1vw;
+  width: var(--music-artwork-width);
 }
 
 .single-artwork img {
@@ -106,7 +113,7 @@
 
 .single-title {
   font-family: 'Roboto Mono', monospace;
-  font-size: 1.1rem;
+  font-size: max(0.6rem, 1.2vw);
   font-weight: 700;
   letter-spacing: 0.15em;
   color: #fff;
@@ -117,7 +124,7 @@
 
 .single-description {
   font-family: 'Roboto Mono', monospace;
-  font-size: 1rem;
+  font-size: max(0.5rem, 0.9vw);
   font-weight: 500;
   letter-spacing: 0.12em;
   line-height: 1.6;
@@ -129,8 +136,8 @@
 .single-btn {
   font-family: 'Roboto Mono', monospace;
   display: inline-block;
-  padding: 0.6rem 2.25rem;
-  font-size: 0.8rem;
+  padding: 0.5vw 2.8vw;
+  font-size: max(0.5rem, 0.95vw);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-decoration: none;
@@ -164,7 +171,15 @@
 
 /* ── Responsive ── */
 
-@media (max-width: 600px) {
+@media (max-width: 768px) {
+  .music-hero-content {
+    padding-top: 10%;
+  }
+
+  .music-hero-description {
+    max-width: var(--music-artwork-width);
+  }
+
   .music-singles {
     padding: 3rem 1.5rem;
     gap: 4rem;
