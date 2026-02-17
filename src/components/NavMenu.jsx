@@ -7,7 +7,7 @@ const MOBILE_MENU_ITEMS = [
   { label: 'Merch', link: '/merch', image: '/mobile/mobile_computer 1.webp', width: 213, height: 214 },
   { label: 'Tour', link: '/tour', image: '/mobile/mobile_globe 1.webp', width: 141, height: 182 },
   { label: 'Videos', link: '/videos', image: '/mobile/mobile_vhs 1.webp', width: 203, height: 116 },
-  { label: 'About', link: '/about', image: '/mobile/mobile_phone 1.webp', width: 94, height: 175 },
+  { label: 'About', link: '/about', image: '/mobile/mobile_phone 1.webp', width: 361, height: 214 },
 ]
 
 function NavMenu() {

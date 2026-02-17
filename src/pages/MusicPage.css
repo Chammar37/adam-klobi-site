@@ -90,10 +90,11 @@
 .music-singles {
   position: relative;
   z-index: 1;
-  background: transparent;
-  margin-top: -12rem;
+  background: url('/music/tracklist-website-fade.png') calc(100% + 10vw) top / 180% auto no-repeat;
+  background-color: #000;
+  margin-top: 0;
   padding: 4rem 2rem;
-  padding-top: 0;
+  padding-top: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;

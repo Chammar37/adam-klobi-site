@@ -7,7 +7,7 @@ const MOBILE_ITEMS = [
   { image: '/mobile/mobile_computer 1.webp', label: 'Merch', link: '/merch', width: 213, height: 214 },
   { image: '/mobile/mobile_globe 1.webp', label: 'Tour', link: '/tour', width: 141, height: 182 },
   { image: '/mobile/mobile_vhs 1.webp', label: 'Videos', link: '/videos', width: 203, height: 116 },
-  { image: '/mobile/mobile_phone 1.webp', label: 'About', link: '/about', width: 94, height: 175 },
+  { image: '/mobile/mobile_phone 1.webp', label: 'About', link: '/about', width: 361, height: 214 },
 ]
 
 const HOTSPOTS = [
