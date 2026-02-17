@@ -14,6 +14,7 @@
   width: 100%;
   height: auto;
   display: block;
+  transition: width 0.4s ease, transform 0.4s ease;
 }
 
 /* Content overlays on the top portion of the image */
@@ -27,10 +28,12 @@
   align-items: center;
   padding-top: 10%;
   gap: 1vw;
+  transition: padding-top 0.4s ease, gap 0.4s ease;
 }
 
 .music-hero-artwork {
   width: var(--music-artwork-width);
+  transition: width 0.4s ease;
 }
 
 .music-hero-artwork img {
@@ -41,7 +44,7 @@
 
 .music-hero-title {
   font-family: 'Roboto Mono', monospace;
-  font-size: max(0.6rem, 1.2vw);
+  font-size: max(0.75rem, 1.4vw);
   font-weight: 700;
   letter-spacing: 0.15em;
   color: #fff;
@@ -52,7 +55,7 @@
 
 .music-hero-description {
   font-family: 'Roboto Mono', monospace;
-  font-size: max(0.5rem, 0.9vw);
+  font-size: max(0.65rem, 1.1vw);
   font-weight: 500;
   letter-spacing: 0.12em;
   line-height: 1.6;
@@ -66,7 +69,7 @@
   font-family: 'Roboto Mono', monospace;
   display: inline-block;
   padding: 0.5vw 2.8vw;
-  font-size: max(0.5rem, 0.95vw);
+  font-size: max(0.65rem, 1.1vw);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-decoration: none;
@@ -103,6 +106,7 @@
   align-items: center;
   gap: 1vw;
   width: var(--music-artwork-width);
+  transition: width 0.4s ease, gap 0.4s ease;
 }
 
 .single-artwork img {
@@ -113,7 +117,7 @@
 
 .single-title {
   font-family: 'Roboto Mono', monospace;
-  font-size: max(0.6rem, 1.2vw);
+  font-size: max(0.75rem, 1.4vw);
   font-weight: 700;
   letter-spacing: 0.15em;
   color: #fff;
@@ -124,7 +128,7 @@
 
 .single-description {
   font-family: 'Roboto Mono', monospace;
-  font-size: max(0.5rem, 0.9vw);
+  font-size: max(0.65rem, 1.1vw);
   font-weight: 500;
   letter-spacing: 0.12em;
   line-height: 1.6;
@@ -137,7 +141,7 @@
   font-family: 'Roboto Mono', monospace;
   display: inline-block;
   padding: 0.5vw 2.8vw;
-  font-size: max(0.5rem, 0.95vw);
+  font-size: max(0.65rem, 1.1vw);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-decoration: none;
@@ -172,8 +176,21 @@
 /* ── Responsive ── */
 
 @media (max-width: 768px) {
+  :root {
+    --music-artwork-width: 60vw;
+  }
+
+  .music-hero-bg {
+    width: 270%;
+    max-width: none;
+    position: relative;
+    left: 50%;
+    transform: translateX(-42%);
+  }
+
   .music-hero-content {
-    padding-top: 10%;
+    padding-top: 22%;
+    gap: 2.5vw;
   }
 
   .music-hero-description {

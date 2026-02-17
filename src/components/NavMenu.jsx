@@ -3,11 +3,11 @@ import { Link, useLocation } from 'react-router-dom'
 import './NavMenu.css'
 
 const MOBILE_MENU_ITEMS = [
-  { label: 'Music', link: '/music', image: '/mobile/mobile_disc 1.webp', width: 209, height: 196 },
-  { label: 'Merch', link: '/merch', image: '/mobile/mobile_computer 1.webp', width: 375, height: 251 },
-  { label: 'Tour', link: '/tour', image: '/mobile/mobile_globe 1.webp', width: 208, height: 204 },
-  { label: 'Videos', link: '/videos', image: '/mobile/mobile_vhs 1.webp', width: 249, height: 178 },
-  { label: 'About', link: '/about', image: '/mobile/mobile_phone 1.webp', width: 361, height: 214 },
+  { label: 'Music', link: '/music', image: '/mobile/mobile_disc 1.webp', width: 165, height: 161 },
+  { label: 'Merch', link: '/merch', image: '/mobile/mobile_computer 1.webp', width: 213, height: 214 },
+  { label: 'Tour', link: '/tour', image: '/mobile/mobile_globe 1.webp', width: 141, height: 182 },
+  { label: 'Videos', link: '/videos', image: '/mobile/mobile_vhs 1.webp', width: 203, height: 116 },
+  { label: 'About', link: '/about', image: '/mobile/mobile_phone 1.webp', width: 94, height: 175 },
 ]
 
 function NavMenu() {
@@ -31,7 +31,7 @@ function NavMenu() {
 
   return (
     <nav className={`nav-menu${pathname === '/' ? ' nav-menu--home' : ''}`}>
-      <Link to="/" className="nav-logo">
+      <Link to="/" className="nav-logo" style={isOpen ? { visibility: 'hidden' } : undefined}>
         <img src="/Adam_Klobi_Logo.svg" alt="Adam Klobi" width={557} height={118} />
       </Link>
       <ul className="nav-links">
@@ -56,6 +56,9 @@ function NavMenu() {
 
       {isOpen && (
         <div className="mobile-nav-overlay">
+          <div className="mobile-nav-logo">
+            <img src="/Adam_Klobi_Logo.svg" alt="Adam Klobi" width={557} height={118} />
+          </div>
           <div className="mobile-nav-items">
             {MOBILE_MENU_ITEMS.map((item) => (
               <Link

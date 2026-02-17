@@ -191,6 +191,7 @@
 @media (max-width: 768px) {
   .interactive-image-container {
     height: auto;
+    overflow: visible;
   }
 
   /* Hide desktop canvas-based hotspots */
@@ -270,7 +271,8 @@
   .mobile-menu-item img {
     width: 42vw;
     max-width: 200px;
-    height: auto;
+    height: 28vw;
+    max-height: 130px;
     object-fit: contain;
   }
 
