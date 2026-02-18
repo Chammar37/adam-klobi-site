@@ -32,7 +32,7 @@ function NavMenu() {
   return (
     <nav className={`nav-menu${pathname === '/' ? ' nav-menu--home' : ''}`}>
       <Link to="/" className={`nav-logo${isOpen ? ' nav-logo--hidden' : ''}`}>
-        <img src="/Adam_Klobi_Logo.svg" alt="Adam Klobi" width={557} height={118} />
+        <img src="/ak_logo.svg" alt="Adam Klobi" width={557} height={118} />
       </Link>
       <ul className="nav-links">
         <li><Link to="/" className={pathname === '/' ? 'active' : ''}>Home</Link></li>
@@ -57,7 +57,7 @@ function NavMenu() {
       {isOpen && (
         <div className="mobile-nav-overlay">
           <div className="mobile-nav-logo">
-            <img src="/Adam_Klobi_Logo.svg" alt="Adam Klobi" width={557} height={118} />
+            <img src="/ak_logo.svg" alt="Adam Klobi" width={557} height={118} />
           </div>
           <div className="mobile-nav-items">
             {MOBILE_MENU_ITEMS.map((item) => (

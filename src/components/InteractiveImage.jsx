@@ -327,7 +327,7 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], ob
             <img src={baseImage} alt="" width={5634} height={3761} draggable={false} />
           </div>
           <div className="mobile-menu-logo">
-            <img src="/Adam_Klobi_Logo.svg" alt="Adam Klobi" width={557} height={118} draggable={false} />
+            <img src="/ak_logo.svg" alt="Adam Klobi" width={557} height={118} draggable={false} />
           </div>
           <div className="mobile-menu-items">
             {mobileItems.map((item) => (

@@ -140,13 +140,13 @@ describe('InteractiveImage', () => {
   })
 
   it('renders logo when provided', () => {
-    const logo = { src: '/Adam_Klobi_Logo.svg', alt: 'Logo', href: '/' }
+    const logo = { src: '/ak_logo.svg', alt: 'Logo', href: '/' }
     renderWithRouter(
       <InteractiveImage baseImage="/base-image.webp" hotspots={[]} logo={logo} />
     )
     const logoImg = screen.getByAltText('Logo')
     expect(logoImg).toBeInTheDocument()
-    expect(logoImg).toHaveAttribute('src', '/Adam_Klobi_Logo.svg')
+    expect(logoImg).toHaveAttribute('src', '/ak_logo.svg')
   })
 
   it('does not render logo when not provided', () => {
