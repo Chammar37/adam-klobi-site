@@ -13,7 +13,7 @@
   left: -921px;
   right: -695px;
   top: calc(50% - 1715px/2 - 253px);
-  background: url('videos/ak_videos_bg.webp') center / cover no-repeat;
+  background: url('/videos/ak_videos_bg.webp') center / cover no-repeat;
   z-index: 0;
 }
 
