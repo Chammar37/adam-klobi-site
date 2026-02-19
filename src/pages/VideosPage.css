@@ -2,19 +2,9 @@
   position: relative;
   overflow: hidden;
   min-height: 100vh;
+  background: url('/videos/ak_videos_bg.webp') center 80% / cover no-repeat fixed;
   background-color: #111;
   padding: 12rem 2rem 4rem;
-}
-
-.videos-page::before {
-  content: '';
-  position: fixed;
-  height: 1715px;
-  left: -921px;
-  right: -695px;
-  top: calc(50% - 1715px/2 - 253px);
-  background: url('/videos/ak_videos_bg.webp') center / cover no-repeat;
-  z-index: 0;
 }
 
 .videos-container {

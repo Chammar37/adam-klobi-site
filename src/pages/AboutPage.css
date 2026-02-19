@@ -1,11 +1,11 @@
 .about-page {
-  min-height: 100vh;
+  flex: 1;
   background: url('/ak_about.webp') center top / cover no-repeat;
   background-color: #000;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  padding: 0 clamp(70px, 6vw, 120px) 3rem;
+  padding: 0 clamp(70px, 6vw, 120px) 3vh;
 }
 
 .about-bio {
@@ -17,16 +17,13 @@
   color: #fff;
   text-transform: uppercase;
   text-align: justify;
-  text-decoration: underline;
-  text-decoration-color: #3a3aff;
-  text-underline-offset: 4px;
-  text-decoration-thickness: 2px;
+  text-decoration: none;
 }
 
 .about-contact {
-  margin-top: 1.5rem;
+  margin-top: 6vh;
   font-family: 'Roboto Mono', monospace;
-  font-size: clamp(0.65rem, 1vw, 0.85rem);
+  font-size: clamp(0.8rem, 1.3vw, 1.05rem);
   font-weight: 400;
   letter-spacing: 0.1em;
   color: #fff;
