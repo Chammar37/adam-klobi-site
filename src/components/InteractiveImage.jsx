@@ -91,6 +91,7 @@ function useCoverTransform(containerRef, imageRef, objectPosition = [50, 50]) {
 function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], objectPosition = [50, 50] }) {
   const [hoveredId, setHoveredId] = useState(null)
   const [flickerId, setFlickerId] = useState(null)
+  const [imageLoaded, setImageLoaded] = useState(false)
   const canvasDataRef = useRef({})
   const preloadedRef = useRef(new Set())
   const containerRef = useRef(null)
@@ -263,12 +264,12 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], ob
         height={3761}
         draggable={false}
         fetchPriority="high"
-        onLoad={onImageLoad}
+        onLoad={(e) => { setImageLoaded(true); onImageLoad(e) }}
         style={{ objectPosition: `${objectPosition[0]}% ${objectPosition[1]}%` }}
       />
 
       {/* PNG Cutout Hotspots — positions mapped from image space to container space */}
-      {hotspots.map((hotspot) => {
+      {imageLoaded && hotspots.map((hotspot) => {
         const mapped = toContainer(
           hotspot.position.x, hotspot.position.y,
           hotspot.size?.width ?? 0, hotspot.size?.height ?? 0
