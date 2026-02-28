@@ -167,10 +167,47 @@
 }
 
 .mobile-nav-item img {
-  width: 36vw;
-  max-width: 180px;
-  height: auto;
   object-fit: contain;
+}
+
+/* Music - disc */
+.mobile-nav-item:nth-child(1) img {
+  width: 50vw;
+  max-width: 230px;
+  height: 33vw;
+  max-height: 150px;
+}
+
+/* Merch - computer */
+.mobile-nav-item:nth-child(2) img {
+  width: 42vw;
+  max-width: 200px;
+  height: 28vw;
+  max-height: 130px;
+}
+
+/* Tour - globe */
+.mobile-nav-item:nth-child(3) img {
+  width: 42vw;
+  max-width: 200px;
+  height: 28vw;
+  max-height: 130px;
+}
+
+/* Videos - VHS */
+.mobile-nav-item:nth-child(4) img {
+  width: 36vw;
+  max-width: 170px;
+  height: 24vw;
+  max-height: 110px;
+}
+
+/* About - phone */
+.mobile-nav-item:nth-child(5) img {
+  width: 52vw;
+  max-width: 240px;
+  height: 34vw;
+  max-height: 160px;
 }
 
 .mobile-nav-item span {

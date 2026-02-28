@@ -269,14 +269,43 @@
   }
 
   .mobile-menu-item img {
+    object-fit: contain;
+  }
+
+  /* Music - disc */
+  .mobile-menu-item:nth-child(1) img {
+    width: 50vw;
+    max-width: 230px;
+    height: 33vw;
+    max-height: 150px;
+  }
+
+  /* Merch - computer */
+  .mobile-menu-item:nth-child(2) img {
     width: 42vw;
     max-width: 200px;
     height: 28vw;
     max-height: 130px;
-    object-fit: contain;
   }
 
-  .mobile-menu-item:last-child img {
+  /* Tour - globe */
+  .mobile-menu-item:nth-child(3) img {
+    width: 42vw;
+    max-width: 200px;
+    height: 28vw;
+    max-height: 130px;
+  }
+
+  /* Videos - VHS */
+  .mobile-menu-item:nth-child(4) img {
+    width: 36vw;
+    max-width: 170px;
+    height: 24vw;
+    max-height: 110px;
+  }
+
+  /* About - phone */
+  .mobile-menu-item:nth-child(5) img {
     width: 52vw;
     max-width: 240px;
     height: 34vw;
