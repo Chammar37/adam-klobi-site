@@ -2,12 +2,26 @@
 
 :root {
   --music-artwork-width: clamp(160px, 32vw, 600px);
+  --music-fade-height: clamp(3rem, 10vw, 10rem);
+  --music-bridge-height: clamp(1.5rem, 4vw, 4rem);
+  --music-first-single-lift: calc(var(--music-artwork-width) + 5.25rem);
 }
 
 .music-page-hero {
   position: relative;
-  overflow: clip;
-  overflow-y: visible;
+  overflow: hidden;
+  background: #000;
+}
+
+.music-page-hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: var(--music-fade-height);
+  pointer-events: none;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0), #000);
 }
 
 /* Background image drives the section height */
@@ -86,15 +100,21 @@
   color: #fff;
 }
 
+.music-section-bridge {
+  height: var(--music-bridge-height);
+  background: #000;
+}
+
 /* ── Singles — stacked centered ── */
 
 .music-singles {
   position: relative;
-  z-index: 1;
-  background: transparent;
+  isolation: isolate;
+  overflow-x: clip;
+  overflow-y: visible;
+  background: #000;
   margin-top: 0;
-  padding: 4rem 2rem;
-  padding-top: 0;
+  padding: 4rem 2rem 5rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -104,13 +124,27 @@
 .music-singles::before {
   content: '';
   position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: url('/music/tracklist-website-fade.png') calc(100% + 10vw) top / 180% auto no-repeat;
-  background-color: #000;
-  z-index: -1;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(
+      to bottom,
+      #000 0%,
+      rgba(0, 0, 0, 0.98) 12%,
+      rgba(0, 0, 0, 0.86) 24%,
+      rgba(0, 0, 0, 0.45) 42%,
+      rgba(0, 0, 0, 0) 60%
+    ),
+    url('/music/tracklist-website-fade.png');
+  background-repeat: no-repeat, no-repeat;
+  background-position: center top, calc(100% + 10vw) top;
+  background-size: 100% min(38rem, 55vw), 180% auto;
+}
+
+.music-singles > * {
+  position: relative;
+  z-index: 1;
 }
 
 .single-card {
@@ -123,7 +157,7 @@
 }
 
 .single-card:first-child {
-  margin-top: -34rem;
+  margin-top: calc(-1 * var(--music-first-single-lift));
 }
 
 .single-artwork img {
@@ -195,6 +229,9 @@
 @media (max-width: 768px) {
   :root {
     --music-artwork-width: 60vw;
+    --music-fade-height: clamp(2.5rem, 13vw, 5rem);
+    --music-bridge-height: clamp(1.25rem, 6vw, 2.75rem);
+    --music-first-single-lift: calc(var(--music-artwork-width) + 4rem);
   }
 
   .music-hero-bg {
@@ -215,7 +252,12 @@
   }
 
   .music-singles {
-    padding: 3rem 1.5rem;
+    padding: 3rem 1.5rem 4rem;
     gap: 4rem;
+  }
+
+  .music-singles::before {
+    background-position: center top, calc(100% + 12vw) top;
+    background-size: 100% min(24rem, 45vw), 220% auto;
   }
 }

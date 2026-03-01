@@ -282,6 +282,10 @@
   }
 
   .nav-menu--home .nav-links {
+    display: block;
+  }
+
+  .nav-menu--home .hamburger {
     display: none;
   }
 }

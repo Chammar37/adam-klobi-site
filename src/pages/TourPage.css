@@ -5,8 +5,16 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   padding: 6rem 2rem 4rem;
+}
+
+.tour-signup-section {
+  width: 100%;
+  min-height: calc(100vh - 10rem);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .tour-dates-section {
@@ -15,8 +23,16 @@
   margin-top: 3rem;
 }
 
+.tour-dates-section:empty {
+  margin-top: 0;
+}
+
 @media (max-width: 768px) {
   .tour-page {
     padding: 5rem 1rem 3rem;
+  }
+
+  .tour-signup-section {
+    min-height: calc(100vh - 8rem);
   }
 }

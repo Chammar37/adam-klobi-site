@@ -76,6 +76,9 @@ function MusicPage() {
         </section>
       )}
 
+      {release && singles.length > 0 && (
+        <div className="music-section-bridge" aria-hidden="true" />
+      )}
 
       {/* Singles — stacked centered layout */}
       {singles.length > 0 && (
