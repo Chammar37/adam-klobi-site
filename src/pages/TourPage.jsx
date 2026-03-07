@@ -8,7 +8,7 @@ function TourPage() {
     <main className="tour-page">
       <PageTitle>Tour</PageTitle>
       <div className="tour-signup-section">
-        <SignupForm text="BE THE FIRST TO KNOW" accentColor="#e63318" source="tour" />
+        <SignupForm text="TOUR DATES COMING SOON - BE THE FIRST TO KNOW" accentColor="#e63318" source="tour" />
       </div>
       <div className="tour-dates-section">
         <TourDates />
