@@ -1,8 +1,10 @@
+import PageTitle from '../components/PageTitle'
 import './AboutPage.css'
 
 function AboutPage() {
   return (
     <main className="about-page">
+      <PageTitle>About</PageTitle>
       <p className="about-bio">
       What's up, I'm Adam Klobi. <br />
       I write songs shaped by borrowed <br />

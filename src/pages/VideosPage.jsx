@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { fetchVideos } from '../lib/sanity'
+import PageTitle from '../components/PageTitle'
 import './VideosPage.css'
 
 function getYouTubeId(url) {
@@ -33,6 +34,7 @@ function VideosPage() {
 
   return (
     <main className="videos-page">
+      <PageTitle>Videos</PageTitle>
       <div className="videos-container">
         {loading && <div className="videos-loading">Loading videos...</div>}
         {error && <div className="videos-error">{error}</div>}

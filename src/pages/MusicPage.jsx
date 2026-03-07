@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import { fetchLatestRelease, fetchSingles, urlFor } from '../lib/sanity'
+import PageTitle from '../components/PageTitle'
 import './MusicPage.css'
 
 function MusicPage() {
@@ -37,6 +38,7 @@ function MusicPage() {
 
   return (
     <main>
+      <PageTitle>Music</PageTitle>
       {/* Hero Album — centered over background image */}
       {release && (
         <section className="music-page-hero">
