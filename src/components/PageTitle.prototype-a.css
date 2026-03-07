@@ -1,0 +1,28 @@
+/* PROTOTYPE A: Nav-Aligned Label (Dominic Fike style) */
+/* Copy this to PageTitle.css to activate */
+
+.page-title {
+  position: absolute;
+  top: clamp(7.5rem, 13vh, 9.5rem);
+  left: clamp(14px, 1.46vw, 28px);
+  z-index: 900;
+  margin: 0;
+  font-family: 'Roboto Mono', monospace;
+  font-size: clamp(0.65rem, 0.8vw, 0.85rem);
+  font-weight: 400;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.5);
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.page-title::before {
+  content: '/ ';
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    display: none;
+  }
+}
