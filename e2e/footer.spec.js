@@ -7,7 +7,8 @@ test.describe('Footer', () => {
     await expect(footer).toBeVisible()
   })
 
-  test('AK logo is visible', async ({ page }) => {
+  test('AK logo is visible', async ({ page, viewport }) => {
+    test.skip(viewport.width <= 768, 'Footer AK logo hidden on mobile by design')
     await page.goto('/')
     const logo = page.locator('.footer-ak img')
     await expect(logo).toBeVisible()

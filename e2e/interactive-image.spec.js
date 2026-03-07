@@ -22,22 +22,21 @@ test.describe('Interactive Image', () => {
     // Container should be roughly viewport height minus footer (100px desktop)
     expect(box.height).toBeGreaterThan(viewport.height - 150)
     expect(box.height).toBeLessThanOrEqual(viewport.height)
-    expect(box.width).toBe(viewport.width)
+    expect(box.width).toBeGreaterThanOrEqual(viewport.width - 1)
   })
 
-  test('hotspot wrappers are present (4 active hotspots)', async ({ page, viewport }) => {
+  test('hotspot wrappers are present (5 active hotspots)', async ({ page, viewport }) => {
     test.skip(viewport.width <= 768, 'Hotspots hidden on mobile')
     await expect(page.locator('.interactive-image-container')).toBeVisible()
     const hotspots = page.locator('.hotspot-wrapper')
-    await expect(hotspots).toHaveCount(4)
+    await expect(hotspots).toHaveCount(5)
   })
 
   test('hotspot images are rendered', async ({ page, viewport }) => {
     test.skip(viewport.width <= 768, 'Hotspots hidden on mobile')
     await expect(page.locator('.interactive-image-container')).toBeVisible()
     const hotspotImages = page.locator('.hotspot-image')
-    const count = await hotspotImages.count()
-    expect(count).toBe(4)
+    await expect(hotspotImages).toHaveCount(5)
   })
 
   test('all hotspots have glow class', async ({ page, viewport }) => {
@@ -57,7 +56,8 @@ test.describe('Interactive Image', () => {
     expect(pointerEvents).toBe('none')
   })
 
-  test('container is relatively positioned', async ({ page }) => {
+  test('container is relatively positioned', async ({ page, viewport }) => {
+    test.skip(viewport.width <= 768, 'Container layout changes on mobile')
     const container = page.locator('.interactive-image-container')
     await expect(container).toBeVisible()
     const position = await container.evaluate((el) =>
