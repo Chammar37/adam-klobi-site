@@ -1,76 +1,4 @@
-/* === PROTOTYPE B: Centered Section Heading (Post Malone style) === */
-/* DEFAULT / ACTIVE PROTOTYPE */
-
-.page-title {
-  position: absolute;
-  top: clamp(6rem, 10vh, 8rem);
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 900;
-  margin: 0;
-  font-family: 'Roboto Mono', monospace;
-  font-size: clamp(1.5rem, 2.5vw, 2.5rem);
-  font-weight: 700;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: #fff;
-  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.6);
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-@media (max-width: 768px) {
-  .page-title {
-    display: none;
-  }
-}
-
-/* ===========================================================================
-   OTHER PROTOTYPES (commented out for comparison)
-
-   TO TEST ANOTHER PROTOTYPE:
-   1. Comment out the active .page-title block above (lines 3-24)
-   2. Uncomment the desired prototype below
-   3. Save and the browser will hot-reload
-   =========================================================================== */
-
-/*
-   PROTOTYPE A: Nav-Aligned Label (Dominic Fike style)
-
-   Visual: Small "/ TOUR" label in top-left, right below nav links
-   Use when: You want minimal, terminal-like aesthetic
-   Benefit: Very subtle, doesn't compete with page content
-   Trade-off: Easy to miss, requires users to notice the small text
-
-.page-title {
-  position: absolute;
-  top: clamp(7.5rem, 13vh, 9.5rem);
-  left: clamp(14px, 1.46vw, 28px);
-  z-index: 900;
-  margin: 0;
-  font-family: 'Roboto Mono', monospace;
-  font-size: clamp(0.65rem, 0.8vw, 0.85rem);
-  font-weight: 400;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.5);
-  pointer-events: none;
-  white-space: nowrap;
-}
-
-.page-title::before {
-  content: '/ ';
-}
-*/
-
-/*
-   PROTOTYPE C: Vertical Side Label (Jack Harlow style)
-
-   Visual: Text rotated 90° running down the left edge
-   Use when: You want a distinctive, editorial film-strip feel
-   Benefit: Unique, eye-catching without being loud
-   Trade-off: Takes up left edge space, can feel unconventional
-
+/* Vertical Side Label */
 .page-title {
   position: fixed;
   left: clamp(14px, 1.46vw, 28px);
@@ -80,39 +8,11 @@
   z-index: 900;
   margin: 0;
   font-family: 'Roboto Mono', monospace;
-  font-size: clamp(0.7rem, 0.85vw, 0.9rem);
-  font-weight: 500;
+  font-size: clamp(0.8rem, 1vw, 1.1rem);
+  font-weight: 900;
   letter-spacing: 0.35em;
   text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.7);
   pointer-events: none;
   white-space: nowrap;
 }
-*/
-
-/*
-   PROTOTYPE D: Giant Watermark (editorial style)
-
-   Visual: Massive outlined text (6-14rem) centered on page, barely visible
-   Use when: You want pure atmosphere and minimalism
-   Benefit: Creates mood without competing with content
-   Trade-off: Very subtle, some users may not even notice it
-
-.page-title {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 900;
-  margin: 0;
-  font-family: 'Roboto Mono', monospace;
-  font-size: clamp(6rem, 15vw, 14rem);
-  font-weight: 700;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, 0.04);
-  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.15);
-  pointer-events: none;
-  white-space: nowrap;
-}
-*/
