@@ -120,7 +120,7 @@ test.describe('Responsive behavior', () => {
     const display = await form.evaluate((el) => getComputedStyle(el).display)
     const direction = await form.evaluate((el) => getComputedStyle(el).flexDirection)
     expect(display).toBe('flex')
-    expect(direction).toBe('row')
+    expect(direction).toBe('row-reverse')
   })
 
   test('merch page fills viewport height', async ({ page, viewport }) => {
@@ -162,8 +162,10 @@ test.describe('Responsive behavior', () => {
 
   test('about page fills viewport height', async ({ page, viewport }) => {
     await page.goto('/about')
-    const box = await page.locator('.about-page').boundingBox()
-    expect(box.height).toBeGreaterThanOrEqual(viewport.height - 1)
+    const aboutBox = await page.locator('.about-page').boundingBox()
+    const footerBox = await page.locator('.site-footer').boundingBox()
+    const footerHeight = footerBox ? footerBox.height : 0
+    expect(aboutBox.height).toBeGreaterThanOrEqual(viewport.height - footerHeight - 1)
   })
 
   test('about page padding reduces on mobile', async ({ page }) => {

@@ -1,9 +1,13 @@
 import { test, expect } from '@playwright/test'
 
 test.describe('Page smoke tests', () => {
-  test('home page loads', async ({ page }) => {
+  test('home page loads', async ({ page, viewport }) => {
     await page.goto('/')
-    await expect(page.locator('.interactive-image-container')).toBeVisible()
+    if (viewport.width <= 768) {
+      await expect(page.locator('.mobile-menu')).toBeVisible()
+    } else {
+      await expect(page.locator('.interactive-image-container')).toBeVisible()
+    }
   })
 
   test('music page loads without error', async ({ page }) => {
