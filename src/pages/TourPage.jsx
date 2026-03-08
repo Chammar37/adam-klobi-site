@@ -1,12 +1,10 @@
 import SignupForm from '../components/SignupForm'
 import TourDates from '../components/TourDates'
-import PageTitle from '../components/PageTitle'
 import './TourPage.css'
 
 function TourPage() {
   return (
     <main className="tour-page">
-      <PageTitle>Tour</PageTitle>
       <div className="tour-signup-section">
         <h2 className="tour-headline">TOUR DATES COMING SOON</h2>
         <p className="tour-subline">BE THE FIRST TO KNOW</p>
