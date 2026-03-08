@@ -1,9 +1,16 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import './SignupForm.css'
 
-function SignupForm({ text, accentColor, source }) {
+function SignupForm({ text, accentColor, source, autoFocus }) {
   const [email, setEmail] = useState('')
   const [status, setStatus] = useState(null)
+  const inputRef = useRef(null)
+
+  useEffect(() => {
+    if (autoFocus && inputRef.current) {
+      inputRef.current.focus()
+    }
+  }, [autoFocus])
 
   const handleSubmit = async (e) => {
     e.preventDefault()
@@ -29,12 +36,13 @@ function SignupForm({ text, accentColor, source }) {
 
   return (
     <div className="signup" style={{ '--accent-color': accentColor }}>
-      <p className="signup-text">{text}</p>
+      {text && <p className="signup-text">{text}</p>}
       {status === 'success' ? (
         <p className="signup-status">You're in!</p>
       ) : (
         <form className="signup-form" onSubmit={handleSubmit}>
           <input
+            ref={inputRef}
             type="email"
             className="signup-input"
             placeholder=""
