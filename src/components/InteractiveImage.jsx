@@ -98,17 +98,18 @@ function InteractiveImage({ baseImage, hotspots = [], logo, mobileItems = [], ob
   const imageRef = useRef(null)
   const navigate = useNavigate()
 
-  // Random TV flicker effect
+  // Random flicker effect for TV, camera, and computer
   useEffect(() => {
-    const flickerTarget = hotspots.find(h => h.id === 'tv' && h.hoverImage)
-    if (!flickerTarget) return
+    const flickerTargets = hotspots.filter(h => (h.id === 'tv' || h.id === 'silver-camera' || h.id === 'computer') && h.hoverImage)
+    if (flickerTargets.length === 0) return
 
     let timeout
     const scheduleFlicker = () => {
       const delay = 1000 + Math.random() * 3000
       timeout = setTimeout(() => {
-        if (hoveredId !== 'tv') {
-          setFlickerId('tv')
+        const target = flickerTargets[Math.floor(Math.random() * flickerTargets.length)]
+        if (hoveredId !== target.id) {
+          setFlickerId(target.id)
           const onDuration = 300 + Math.random() * 500
           setTimeout(() => setFlickerId(null), onDuration)
         }
