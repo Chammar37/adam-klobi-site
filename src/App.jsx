@@ -50,7 +50,7 @@ const HOTSPOTS = [
   {
     id: 'globe',
     label: 'Tour',
-    image: '/hotspots/GLOBE-1.png',
+    image: '/hotspots/GLOBE-1.webp',
     position: { x: 70.3, y: 26.7 },
     size: { width: 7, height: 14.1 },
     naturalWidth: 399,
