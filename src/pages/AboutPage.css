@@ -48,8 +48,13 @@
 
   .about-bio {
     margin-top: auto;
-    margin-bottom: auto;
+    margin-bottom: 0;
     padding-top: 18vh;
     font-size: clamp(0.85rem, 4vw, 1.2rem);
+  }
+
+  .about-contact {
+    margin-top: 3vh;
+    margin-bottom: auto;
   }
 }
