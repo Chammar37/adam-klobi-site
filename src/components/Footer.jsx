@@ -5,7 +5,7 @@ function Footer() {
   return (
     <footer className="site-footer">
       <div className="footer-ak">
-        <img src="/AK_Footer.svg" alt="AK" width={198} height={163} />
+        <img src="/AK_Footer_v1.svg" alt="AK" width={198} height={163} />
       </div>
       <div className="footer-socials">
         <a href="https://open.spotify.com/artist/adamklobi" target="_blank" rel="noopener noreferrer" aria-label="Spotify">

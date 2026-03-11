@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   background: #000;
-  padding: 0 0 0 10px;
+  padding: 0 clamp(16px, 2vw, 40px) 0 clamp(10px, 1.5vw, 25px);
 }
 
 .footer-ak img {

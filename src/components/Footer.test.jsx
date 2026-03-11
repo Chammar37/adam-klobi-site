@@ -8,7 +8,7 @@ describe('Footer', () => {
     renderWithRouter(<Footer />)
     const logo = screen.getByAltText('AK')
     expect(logo).toBeInTheDocument()
-    expect(logo).toHaveAttribute('src', '/AK_Footer.svg')
+    expect(logo).toHaveAttribute('src', '/AK_Footer_v1.svg')
   })
 
   it('renders 6 social links', () => {

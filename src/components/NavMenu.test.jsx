@@ -8,7 +8,7 @@ describe('NavMenu', () => {
     renderWithRouter(<NavMenu />)
     const logo = screen.getByAltText('Adam Klobi')
     expect(logo).toBeInTheDocument()
-    expect(logo).toHaveAttribute('src', '/ak_logo.svg')
+    expect(logo).toHaveAttribute('src', '/ak_logo_v1.svg')
   })
 
   it('renders all 6 navigation links', () => {
