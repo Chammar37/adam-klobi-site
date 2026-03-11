@@ -6,7 +6,9 @@ function TourPage() {
   return (
     <main className="tour-page">
       <div className="tour-signup-section">
-        <SignupForm text="BE THE FIRST TO KNOW" accentColor="#e63318" source="tour" />
+        <h2 className="tour-headline">TOUR DATES COMING SOON</h2>
+        <p className="tour-subline">BE THE FIRST TO KNOW</p>
+        <SignupForm text="" accentColor="#e63318" source="tour" autoFocus />
       </div>
       <div className="tour-dates-section">
         <TourDates />

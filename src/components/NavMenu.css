@@ -88,7 +88,11 @@
 }
 
 .nav-links a.active {
-  font-weight: 700;
+  font-weight: 900;
+  text-decoration: underline;
+  text-decoration-color: #e63318;
+  text-underline-offset: 4px;
+  text-decoration-thickness: 2px;
 }
 
 /* When links wrap below logo, reduce left padding */

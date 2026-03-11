@@ -13,8 +13,31 @@
   width: 100%;
   min-height: calc(100vh - 10rem);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+.tour-headline {
+  font-family: 'Roboto Mono', monospace;
+  font-size: 1rem;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  margin: 0 0 0.15rem;
+}
+
+.tour-subline {
+  font-family: 'Roboto Mono', monospace;
+  font-size: clamp(0.75rem, 1.1vw, 1rem);
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  margin: 0 0 1rem;
 }
 
 .tour-dates-section {
